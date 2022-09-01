@@ -4,7 +4,7 @@ title: About me
 # subtitle: Why you'd want to go on a date with me
 ---
 
-Cihan is a master's student at Johns Hopkins University's center of language and speech processing (CLSP). His current research interests lie in automatic speech alignment, speech translation, machine learning and natural language processing in general.
+Cihan is a master's student at Johns Hopkins University's [center of language and speech processing (CLSP)](https://www.clsp.jhu.edu/). His current research interests lie in automatic speech alignment, speech translation, machine learning and natural language processing in general.
 
 ### Academic
 
