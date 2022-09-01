@@ -8,4 +8,4 @@ Cihan is a master's student at Johns Hopkins University's [center of language an
 
 ### Academic
 
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+Cihan is a second-year master's student at Johns Hopkins University advised by Professor [Sanjeev Khudanpur](https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur/). Before that, he was a student at Virginia Tech majoring in computer science.
