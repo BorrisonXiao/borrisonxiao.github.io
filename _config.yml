@@ -38,7 +38,7 @@ round-avatar: false
 
 # If you want to have an image logo in the top-left corner instead of having the title of the website,
 # then specify the following parameter
-#title-img: /path/to/image
+title-img: /Users/borrison/Documents/website/github/borrisonxiao.github.io/assets/img/Site.png
 
 #####################################
 # --- Footer social media links --- #
