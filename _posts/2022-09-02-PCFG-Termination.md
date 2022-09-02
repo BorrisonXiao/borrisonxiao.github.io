@@ -46,7 +46,7 @@ plt.show()
 ```
 
 
-    
-![png](../assets/blogs/pcfg_termination_files/pcfg_termination_3_0.png)
-    
+
+![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_3_0.png)
+
 
