@@ -1,3 +1,9 @@
+---
+layout: post
+title: 2022-09-02-PCFG-Termination
+tags: [NLP]
+---
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -46,7 +52,7 @@ plt.show()
 ```
 
 
-    
-![png](PCFG-Termination_files/PCFG-Termination_3_0.png)
-    
+
+![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_3_0.png)
+
 
