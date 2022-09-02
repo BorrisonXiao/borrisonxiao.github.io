@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2022-09-02-PCFG-Termination
+title: PCFG Termination
 tags: [NLP]
 ---
 
