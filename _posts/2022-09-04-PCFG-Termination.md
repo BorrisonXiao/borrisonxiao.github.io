@@ -111,6 +111,21 @@ $$
 \end{equation}
 $$
 
+We can solve the equation below to find the limit of the sequence:
+
+$$
+\begin{align*}
+\lim_{h \rightarrow \infty}x_{h+1} &= \lim_{h \rightarrow \infty} [1 - p + px^2_h]\\
+x &= 1 - p + px^2
+\end{align*}
+$$
+
+which has two solutions $x = 1$ or $\displaystyle x = \frac{1}{p} - 1$.
+
+Since the sequence increases monotonically and $p \in [0, 1]$, we know that $x$ will converge to the first fix point it meets, i.e. $\displaystyle \text{min}(1, \frac{1}{p} - 1)$.
+
+The code below verifies this conclusion.
+
 
 ```python
 import numpy as np
@@ -154,16 +169,28 @@ for i, p0 in enumerate(np.arange(1e-12, 1, interval)):
 
 
 ```python
-plt.plot(np.arange(1e-12, 1, interval), cvg)
-plt.xticks(np.arange(0, 1, .1))
+fig, ax = plt.subplots(1, 2, figsize=(5 * 2, 4))
+ax[0].plot(np.arange(0, 1, interval), cvg)
+ax[0].set_xticks(np.arange(0, 1, .1))
+ax[0].set_xlabel("M")
+ax[0].set_ylabel('Perplexity')
+ax[0].set_title("Held-out Estimate")
+
+ax[1].plot(np.arange(0, 1, interval), cvg)
+ax[1].set_xticks(np.arange(0, 1, .1))
+ax[1].set_xlabel("M")
+ax[1].set_ylabel('Perplexity')
+ax[1].set_title("Held-out Estimate")
 plt.show()
 ```
 
 
 
-![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_8_0.png)
+![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_9_0.png)
 
 
+
+Therefore, if $\displaystyle p > \frac{1}{2}$, we will have $\displaystyle x = \lim_{h \rightarrow \infty}x_h < 1$
 
 # Appendix
 
