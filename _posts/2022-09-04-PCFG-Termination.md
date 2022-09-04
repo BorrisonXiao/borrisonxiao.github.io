@@ -22,6 +22,7 @@ Let us define $x_h$ to be the **total probability** of all parse trees with heig
 $$
 \begin{equation}
 x_{h+1} = 1 - p + px^2_{h}
+\tag{1}
 \end{equation}
 $$
 
@@ -106,7 +107,7 @@ Our sequence is obviously monotonically increasing by its definition, can you pr
 $$
 \begin{equation}
 0 < \lim_{h \rightarrow \infty}x_h \leq 1
-\label{eq:bound}
+\tag{2}
 \end{equation}
 $$
 
@@ -166,4 +167,22 @@ plt.show()
 
 # Appendix
 
-### Proof of Equation~\ref{eq:bound}
+### Proof of Sequence Bound
+
+This can be proved by induction.
+
+Base case: $0 < x_1 = 1 - p \leq 1$.
+
+Induction Hypothesis: $0 < x_k \leq 1$ for $k \geq 1$.
+
+Proof of Induction:
+
+$$
+\begin{align*}
+0 < &x_k \leq 1\\
+0 < &x^2_k \leq 1\\
+0 < &px^2_k \leq p\\
+0 \leq 1 - p < &1 - p + x^2_k \leq 1 - p + p\\
+0 < &x_{h+1} \leq 1
+\end{align*}
+$$
