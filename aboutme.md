@@ -2,8 +2,9 @@
 layout: page
 title: About me
 ---
+
 <div align="center">
-    <img width="160px" src="./assets/img/Profile.jpg">
+    <img width="160px" src="{{site.baseurl}}/assets/img/Profile.jpg">
 </div>
 
 <br clear="left"/>
