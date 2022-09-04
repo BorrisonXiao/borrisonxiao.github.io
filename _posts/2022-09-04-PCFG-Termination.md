@@ -26,7 +26,7 @@ x_{h+1} = 1 - p + px^2_{h}
 \end{equation}
 $$
 
-The intuition of the recursive equation is from the fact that the set of all trees with height $\leq h + 1$, i.e. $T_{h+1}$, consists of the the base case tree $t_1$ with one single expansion $S \rightarrow x$ and all trees in the form of a root $S$ and two subtrees in $t_h \in T_h$ for all $h > 1$, as shown in the graph below:
+The intuition of the recursive equation is from the fact that the set of all trees with height $\leq h + 1$, i.e. $T_{h+1}$, consists of the the base case tree $t_1$ with one single expansion $S \rightarrow x$ and all trees in the form of a root $S$ and two subtrees in $t_h \in T_h$ for all $h \geq 1$, as shown in the graph below:
 
 
 ```python
