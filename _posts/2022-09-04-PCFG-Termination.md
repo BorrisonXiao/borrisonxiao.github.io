@@ -7,12 +7,14 @@ tags: [NLP]
 In general, a probabilistic context-free grammar (PCFG) in Chomsky normal form may be **improper**, i.e. the sum of the probability of parses successfully generated may be less than 1.
 
 For instance, given the PCFG below:
+
 $$
 \begin{align*}
 p \qquad &S \rightarrow S \ S\\
 1 - p \qquad &S \rightarrow x
 \end{align*}
 $$
+
 in which $S$ is the only non-terminal, $x$ is the only terminal and the probability of picking the rule $S \rightarrow S \ S$ is $p$ and $S \rightarrow x$ is $1 - p$.
 
 Let us define $x_h$ to be the **total probability** of all parse trees with height $\leq h$. In fact, $x_h$ can be computed through a recursive equation:
@@ -22,6 +24,9 @@ The intuition of the recursive equation is from the fact that the set of all tre
 
 
 ```python
+"""
+Graphviz is a cool tool for making graphs, it is also able to produce many complex graphs like FSMs.
+"""
 from graphviz import Digraph
 
 tree1 = Digraph(name="cluster0", node_attr={"shape": "plaintext"})
@@ -63,15 +68,31 @@ tree1
 
 
 
-In the figure above, the leftmost tree is the base case $h = 1$, and obviously $x_1 = 1 - p$.
+In the figure above, the leftmost tree is the base case $h = 1$, and obviously $P(t_1) = x_1 = 1 - p$.
 
-The rightmost tree is the general form of any tree $t_{h + 1}$ with $h > 1$, whose total probability
+The rightmost tree is the general form of any tree $t_{h + 1}$ with $h > 1$, whose total probability is
 $$
 \begin{align*}
-\sum_{t \in T_{h+1}}P(t) = x_{h + 1} &= \underbrace{P(S \rightarrow x)}_{\text{Base case}} + \underbrace{P(S \rightarrow x)(\sum_{t_h \in T_h}P(t_h))^2}_{\text{Recursion}}\\
-&= 1 - p + px^2_h
+\sum_{t \in T_{h+1} - \{ t_1 \}}P(t) &= P(S \rightarrow S \ S)(\sum_{t_h \in T_h}P(t_h))^2\\
+&= px^2_h
 \end{align*}
 $$
+
+Hence, we arrive to the conclusion that
+$$
+\begin{align*}
+x_{h+1} = \sum_{t \in T_{h+1}}P(t) &= P(t_1) + \sum_{t \in T_{h+1} - \{ t_1 \}}P(t)\\
+&= 1 - p + px^2_{h}
+\end{align*}
+$$
+
+Now let's do some basic calculus :-)
+
+To compute the total probability of all finite-depth parse trees, we are essentially computing the limit of the recursive formula, i.e. $\displaystyle \lim_{h \rightarrow \infty}x_h$. Recall the [monotone convergence theorem](https://en.wikipedia.org/wiki/Monotone_convergence_theorem#:~:text=Informally%2C%20the%20theorems%20state%20that,will%20converge%20to%20the%20infimum.) states that
+
+> A sequence converges if it is monotonic (increasing or decreasing) and bounded.
+
+Our sequence is obviously monotonically increasing by its definition, can you prove that it is bounded? A short proof is given in the appendix.
 
 
 ```python
@@ -123,6 +144,6 @@ plt.show()
 
 
 
-![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_7_0.png)
+![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_8_0.png)
 
 
