@@ -100,6 +100,8 @@ To compute the total probability of all finite-depth parse trees, we are essenti
 
 > A sequence converges if it is monotonic (increasing or decreasing) and bounded.
 
+A review of recursive sequence can be found [here](https://www.ms.uky.edu/~droyster/ma114F16/RecursiveSequences.pdf).
+
 Our sequence is obviously monotonically increasing by its definition, can you prove that it is bounded? A short proof is given in the appendix.
 
 *Hint: It can be proved by induction that*
@@ -147,40 +149,40 @@ def compute_rec(rec, init, args, iter):
 
 ```python
 cvg = []
+ref = []
 interval = .01
 for i, p0 in enumerate(np.arange(1e-12, 1, interval)):
     cvg.append(compute_rec(rec=rec, init=p0, args={
         "p": p0}, iter=2000)[-1])
+    ref.append(min(1, 1 / p0 - 1))
     if not i % 10:
-        print(f"p0 = {p0:.2f}\tconvergence = {cvg[-1]:.2f}\t(1 / p0 - 1) = {1 / p0 - 1:.2f}")
+        print(f"p = {p0:.2f}\tconvergence = {cvg[-1]:.2f}\tmin(1, 1/p - 1) = {ref[-1]:.2f}\t(1/p - 1) = {1 / p0 - 1:.2f}")
 ```
 
-    p0 = 0.00	convergence = 1.00	(1 / p0 - 1) = 999999999999.00
-    p0 = 0.10	convergence = 1.00	(1 / p0 - 1) = 9.00
-    p0 = 0.20	convergence = 1.00	(1 / p0 - 1) = 4.00
-    p0 = 0.30	convergence = 1.00	(1 / p0 - 1) = 2.33
-    p0 = 0.40	convergence = 1.00	(1 / p0 - 1) = 1.50
-    p0 = 0.50	convergence = 1.00	(1 / p0 - 1) = 1.00
-    p0 = 0.60	convergence = 0.67	(1 / p0 - 1) = 0.67
-    p0 = 0.70	convergence = 0.43	(1 / p0 - 1) = 0.43
-    p0 = 0.80	convergence = 0.25	(1 / p0 - 1) = 0.25
-    p0 = 0.90	convergence = 0.11	(1 / p0 - 1) = 0.11
+    p = 0.00	convergence = 1.00	min(1, 1/p - 1) = 1.00	(1/p - 1) = 999999999999.00
+    p = 0.10	convergence = 1.00	min(1, 1/p - 1) = 1.00	(1/p - 1) = 9.00
+    p = 0.20	convergence = 1.00	min(1, 1/p - 1) = 1.00	(1/p - 1) = 4.00
+    p = 0.30	convergence = 1.00	min(1, 1/p - 1) = 1.00	(1/p - 1) = 2.33
+    p = 0.40	convergence = 1.00	min(1, 1/p - 1) = 1.00	(1/p - 1) = 1.50
+    p = 0.50	convergence = 1.00	min(1, 1/p - 1) = 1.00	(1/p - 1) = 1.00
+    p = 0.60	convergence = 0.67	min(1, 1/p - 1) = 0.67	(1/p - 1) = 0.67
+    p = 0.70	convergence = 0.43	min(1, 1/p - 1) = 0.43	(1/p - 1) = 0.43
+    p = 0.80	convergence = 0.25	min(1, 1/p - 1) = 0.25	(1/p - 1) = 0.25
+    p = 0.90	convergence = 0.11	min(1, 1/p - 1) = 0.11	(1/p - 1) = 0.11
 
 
 
 ```python
 fig, ax = plt.subplots(1, 2, figsize=(5 * 2, 4))
 ax[0].plot(np.arange(0, 1, interval), cvg)
-ax[0].set_xticks(np.arange(0, 1, .1))
-ax[0].set_xlabel("M")
-ax[0].set_ylabel('Perplexity')
-ax[0].set_title("Held-out Estimate")
+ax[0].set_xticks(np.arange(0, 1.1, .1))
+ax[0].set_xlabel("p")
+ax[0].set_ylabel('x')
 
-ax[1].plot(np.arange(0, 1, interval), cvg)
-ax[1].set_xticks(np.arange(0, 1, .1))
-ax[1].set_xlabel("M")
-ax[1].set_ylabel('Perplexity')
-ax[1].set_title("Held-out Estimate")
+ax[1].plot(np.arange(0, 1, interval), ref, color="orange")
+ax[1].set_xticks(np.arange(0, 1.1, .1))
+ax[1].set_xlabel("p")
+ax[1].set_ylabel('min(1, 1/p - 1)')
 plt.show()
 ```
 
@@ -190,9 +192,20 @@ plt.show()
 
 
 
-Therefore, if $\displaystyle p > \frac{1}{2}$, we will have $\displaystyle x = \lim_{h \rightarrow \infty}x_h < 1$
+Therefore, if $\displaystyle p > \frac{1}{2}$, we will have $\displaystyle \frac{1}{p} - 1 < 1 \Rightarrow x = \lim_{h \rightarrow \infty}x_h = \text{min}(1, \frac{1}{p} - 1) < 1$, i.e. an improper probability. This further implies that there is a non-zero probability that the PCFG might not terminate at all.
 
-# Appendix
+We may also interpret this phenomenon intuitively. The outcome of the generation of this certain PCFG consists of two parts, those who eventually terminate (including trees with $h = \infty$) and those who don't. It happens that when the probability of picking the rule $\displaystyle P(S \rightarrow S \ S) = p > \frac{1}{2}$, the **total** probability of running the generation process forever $> 0$.
+
+In practice, we would like to avoid assigning such improper probability to the grammar. Fortunately, it appears that the maximum likelihood estimation (MLE) will always produce a proper distribution. A further discussion about this topic, as well as its extensions, can be found in [this paper](https://aclanthology.org/J99-1004.pdf).
+
+## Acknowledgement
+Special thanks to [Brian Lu](mailto:zlu39@jhu.edu) for his support for this blog post.
+
+## Reference
+
+Chi, Zhiyi. “Statistical Properties of Probabilistic Context-Free Grammars.” Comput. Linguistics 25 (1999): 131-160.
+
+## Appendix
 
 ### Proof of Sequence Bound
 
