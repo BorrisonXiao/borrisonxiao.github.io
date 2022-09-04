@@ -192,9 +192,9 @@ plt.show()
 
 
 
-Therefore, if $\displaystyle p > \frac{1}{2}$, we will have $\displaystyle \frac{1}{p} - 1 < 1 \Rightarrow x = \lim_{h \rightarrow \infty}x_h = \text{min}(1, \frac{1}{p} - 1) < 1$, i.e. an improper probability. This further implies that there is a non-zero probability that the PCFG might not terminate at all.
+Therefore, if $\displaystyle p > \frac{1}{2}$, we will have $\displaystyle \frac{1}{p} - 1 < 1 \Rightarrow x = \lim_{h \rightarrow \infty}x_h = \text{min}(1, \frac{1}{p} - 1) < 1$, i.e. an improper probability. This further implies that there is a non-zero probability that the PCFG does not terminate at all.
 
-We may also interpret this phenomenon intuitively. The outcome of the generation of this certain PCFG consists of two parts, those who eventually terminate (including trees with $h = \infty$) and those who don't. It happens that when the probability of picking the rule $\displaystyle P(S \rightarrow S \ S) = p > \frac{1}{2}$, the **total** probability of running the generation process forever $> 0$.
+We may also interpret this phenomenon intuitively. The outcomes of the generation of this certain PCFG can be categorized into two parts, those who eventually terminate (including trees with $h = \infty$) and those who don't. It happens that when the probability of picking the rule $\displaystyle P(S \rightarrow S \ S) = p > \frac{1}{2}$, the **total** probability of running the generation process forever $> 0$, resulting in an improper distribution for the terminated parse trees.
 
 In practice, we would like to avoid assigning such improper probability to the grammar. Fortunately, it appears that the maximum likelihood estimation (MLE) will always produce a proper distribution. A further discussion about this topic, as well as its extensions, can be found in [this paper](https://aclanthology.org/J99-1004.pdf).
 
