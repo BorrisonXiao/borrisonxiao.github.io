@@ -18,7 +18,12 @@ $$
 in which $S$ is the only non-terminal, $x$ is the only terminal and the probability of picking the rule $S \rightarrow S \ S$ is $p$ and $S \rightarrow x$ is $1 - p$.
 
 Let us define $x_h$ to be the **total probability** of all parse trees with height $\leq h$. In fact, $x_h$ can be computed through a recursive equation:
-$$x_{h+1} = 1 - p + px^2_{h}$$
+
+$$
+\begin{equation}
+x_{h+1} = 1 - p + px^2_{h}
+\end{equation}
+$$
 
 The intuition of the recursive equation is from the fact that the set of all trees with height $\leq h + 1$, i.e. $T_{h+1}$, consists of the the base case tree $t_1$ with one single expansion $S \rightarrow x$ and all trees in the form of a root $S$ and two subtrees in $t_h \in T_h$ for all $h > 1$, as shown in the graph below:
 
@@ -71,6 +76,7 @@ tree1
 In the figure above, the leftmost tree is the base case $h = 1$, and obviously $P(t_1) = x_1 = 1 - p$.
 
 The rightmost tree is the general form of any tree $t_{h + 1}$ with $h > 1$, whose total probability is
+
 $$
 \begin{align*}
 \sum_{t \in T_{h+1} - \{ t_1 \}}P(t) &= P(S \rightarrow S \ S)(\sum_{t_h \in T_h}P(t_h))^2\\
@@ -79,6 +85,7 @@ $$
 $$
 
 Hence, we arrive to the conclusion that
+
 $$
 \begin{align*}
 x_{h+1} = \sum_{t \in T_{h+1}}P(t) &= P(t_1) + \sum_{t \in T_{h+1} - \{ t_1 \}}P(t)\\
@@ -93,6 +100,15 @@ To compute the total probability of all finite-depth parse trees, we are essenti
 > A sequence converges if it is monotonic (increasing or decreasing) and bounded.
 
 Our sequence is obviously monotonically increasing by its definition, can you prove that it is bounded? A short proof is given in the appendix.
+
+*Hint: It can be proved by induction that*
+
+$$
+\begin{equation}
+0 < \lim_{h \rightarrow \infty}x_h \leq 1
+\label{eq:bound}
+\end{equation}
+$$
 
 
 ```python
@@ -147,3 +163,7 @@ plt.show()
 ![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_8_0.png)
 
 
+
+# Appendix
+
+### Proof of Equation~\ref{eq:bound}
