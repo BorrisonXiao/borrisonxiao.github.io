@@ -186,3 +186,5 @@ $$
 0 < &x_{h+1} \leq 1
 \end{align*}
 $$
+
+Thus, the equation $0 < \displaystyle \lim_{h \rightarrow \infty}x_h \leq 1$ if proved.
