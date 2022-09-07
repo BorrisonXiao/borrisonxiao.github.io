@@ -227,4 +227,4 @@ $$
 \end{align*}
 $$
 
-Thus, the equation $0 < \displaystyle \lim_{h \rightarrow \infty}x_h \leq 1$ if proved.
+Thus, the equation $0 < \displaystyle \lim_{h \rightarrow \infty}x_h \leq 1$ is proved.
