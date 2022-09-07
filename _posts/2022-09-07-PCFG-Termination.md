@@ -108,7 +108,7 @@ Our sequence is obviously monotonically increasing by its definition, can you pr
 
 $$
 \begin{equation}
-0 < \lim_{h \rightarrow \infty}x_h \leq 1
+0 \leq \lim_{h \rightarrow \infty}x_h \leq 1
 \tag{2}
 \end{equation}
 $$
@@ -211,20 +211,20 @@ Chi, Zhiyi. “Statistical Properties of Probabilistic Context-Free Grammars.”
 
 This can be proved by induction.
 
-Base case: $0 < x_1 = 1 - p \leq 1$.
+Base case: $0 \leq x_1 = 1 - p \leq 1$.
 
-Induction Hypothesis: $0 < x_k \leq 1$ for $k \geq 1$.
+Induction Hypothesis: $0 \leq x_k \leq 1$ for $k \geq 1$.
 
 Proof of Induction:
 
 $$
 \begin{align*}
-0 < &x_k \leq 1\\
-0 < &x^2_k \leq 1\\
-0 < &px^2_k \leq p\\
-0 \leq 1 - p < &1 - p + x^2_k \leq 1 - p + p\\
-0 < &x_{h+1} \leq 1
+0 \leq &x_k \leq 1\\
+0 \leq &x^2_k \leq 1\\
+0 \leq &px^2_k \leq p\\
+0 \leq 1 - p \leq &1 - p + x^2_k \leq 1 - p + p\\
+0 \leq &x_{h+1} \leq 1
 \end{align*}
 $$
 
-Thus, the equation $0 < \displaystyle \lim_{h \rightarrow \infty}x_h \leq 1$ is proved.
+Thus, the equation $0 \leq \displaystyle \lim_{h \rightarrow \infty}x_h \leq 1$ is proved.
