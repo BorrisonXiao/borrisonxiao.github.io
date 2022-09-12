@@ -4,7 +4,13 @@ title: PCFG Termination
 tags: [NLP]
 ---
 
-In general, a probabilistic context-free grammar (PCFG) in Chomsky normal form may be **improper**, i.e. the sum of the probability of parses successfully generated may be less than 1.
+## Introduction
+
+Given a program that reads a probabilistic context-free grammar (PCFG) and generates sentences according to the grammar, for instance, `randsent.py`, it is **necessary** for the program to have a parameter such as `--max-expansions` to limit the number of expansions of the rules. This is due to the fact that the program might not only just run for a long time -- sometimes it runs for an INFINITELY long time! That is, there are grammars on which the program has probability > 0 (for example, probability 0.7) of running forever.
+
+## Discussion
+
+In general, a PCFG may be **improper**, i.e. the sum of the probability of parses successfully generated may be less than 1.
 
 For instance, given the PCFG below:
 
@@ -69,7 +75,7 @@ tree1
 
 
 
-![svg](../assets/blogs/PCFG-Termination_files/PCFG-Termination_2_0.svg)
+![svg](../assets/blogs/PCFG-Termination_files/PCFG-Termination_5_0.svg)
 
 
 
@@ -188,7 +194,7 @@ plt.show()
 
 
 
-![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_9_0.png)
+![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_12_0.png)
 
 
 
@@ -196,10 +202,12 @@ Therefore, if $\displaystyle p > \frac{1}{2}$, we will have $\displaystyle \frac
 
 We may also interpret this phenomenon intuitively. The outcomes of the generation of this certain PCFG can be categorized into two parts, those who eventually terminate (including trees with $h = \infty$) and those who don't. It happens that when the probability of picking the rule $\displaystyle P(S \rightarrow S \ S) = p > \frac{1}{2}$, the **total** probability of running the generation process forever $> 0$, resulting in an improper distribution for the terminated parse trees.
 
-In practice, we would like to avoid assigning such improper probability to the grammar. Fortunately, it appears that the maximum likelihood estimation (MLE) will always produce a proper distribution. A further discussion about this topic, as well as its extensions, can be found in [this paper](https://aclanthology.org/J99-1004.pdf).
+## Conclusion
+
+In conclusion, an improper PCFG may be improper as long as the probability assigned to the self-branching rules (like $S \rightarrow S \ S$) is sufficently large. In practice, we would like to avoid assigning such improper probability to the grammar. Fortunately, it appears that the maximum likelihood estimation (MLE) will always produce a proper distribution. A further discussion about this topic, as well as its extensions, can be found in [this paper](https://aclanthology.org/J99-1004.pdf).
 
 ## Acknowledgement
-Special thanks to [Brian Lu](mailto:zlu39@jhu.edu) for his support for this blog post.
+Special thanks to [Brian Lu](mailto:zlu39@jhu.edu) and [Jason Eisner](https://www.cs.jhu.edu/~jason/) for their support for this blog post.
 
 ## Reference
 
