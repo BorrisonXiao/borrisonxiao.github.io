@@ -23,6 +23,7 @@ Note that by the first-order Markov assumption of the model:
 ## Inference
 
 Given a HMM, we would like to use it to do *inference*, i.e. given the transition kernel and the emission probabilities, we would like to compute certain probabilities. For instance, the derivation below shows how to compute the joint probability of a sequence of observations with length $T$, $x_{1:T}$, and a sequence of hidden states (also with length $T$), $s_{1:T}$, i.e.
+
 $$
 \begin{align*}
 P(s_{1:T}, x_{1:T}) &= P(x_1 | x_{2:T}, s_{1:T}) P(x_{2:T}, s_{1:T})\\
@@ -50,28 +51,35 @@ Traditionally, there are two different scenarios, namely the **supervised** and 
 ### Supervised Learning
 
 In the supervised case, the data is given in pairs of $(\vec{x}^{(i)}, \vec{s}^{(i)})$, or equivalently, we are provided with the observations as well as their associated hidden states. For this case, we can simply use the maximum likelihood estimate (MLE), that is, we are trying to maximize:
+
 $$
 P(\vec{x}, \vec{s})
 $$
+
 which simply gives:
+
 $$
 \begin{align*}
 \displaystyle P(s^\prime | s) &= \frac{c(s \rightarrow s^\prime)}{c(s)} \\
 \displaystyle P(w | s) &= \frac{c(w | s)}{c(s)}
 \end{align*}
 $$
+
 in which $c(s \rightarrow s^\prime)$ denotes the count of the transition $s \rightarrow s^\prime$ that takes place in the training data, $c(w | s)$ denotes the count of the emission $w | s$ and $c(s)$ denotes the count of state $s$ in the training data.
 
 ### Unsupervised Learning
 
 In the unsupervised setting, the data we have access to has only the observations. This is more common in reality, since human annotations are very expensive to obtain especially when the size of the data scales. The principle of our learning remains unchanged, as we are still trying to maximize the likelihood of the data. However, this time we are maximizing the **incomplete data likelihood**, i.e.
+
 $$P(\vec{x}) = \sum_{\vec{s}} P(\vec{x}, \vec{s})$$
 
 In order to maximize the this probability, we often use the **expectation maximization** (EM) algorithm to iteratively finds a set of parameters. For the simplicity of this post, we only provide the resulting parameter update equation, which is also known as the **Baum-Welch** algorithm:
+
 $$
 \begin{align*}
     P(s^\prime | s) &= \displaystyle \frac{\displaystyle \sum_{t = 1}^{T - 1} P(S_t = s^\prime, S_{t-1} = s | x_{1:T})}{\displaystyle \sum_{t=1}^{T-1} P(S_{t-1} = s | x_{1:T})}\\
     P(w | s) &= \displaystyle \frac{\displaystyle \sum_{t = 1}^{T} P(S_t = s | x_{1:T}) \mathbb{I}(x_t = w)}{\displaystyle \sum_{t=1}^{T} P(S_t = s | x_{1:T})}
 \end{align*}
 $$
+
 where $\mathbb{I}$ is the indicator function.
