@@ -12,17 +12,33 @@ The **hidden Markov model** (HMM) is a statistical model that assumes the sequen
 
 The two key components of a HMM are:
 
-1). The **transition probabilities**, i.e. $$P(S_{t+1} = s^\prime | S_{t} = s)$$;
+1). The **transition probabilities**, i.e.
 
-2). The **emission probabilities**, i.e. $$P(X_{t} = w | S_{t} = s)$$.
+$$P(S_{t+1} = s^\prime | S_{t} = s)$$
+
+;
+
+2). The **emission probabilities**, i.e.
+
+$$P(X_{t} = w | S_{t} = s)$$
+
+.
 
 where $S_t$ denotes the random variable of the hidden state at time $t$, and $X_t$ denotes the randome variable of the observation at time $t$.
 
 Note that by the first-order Markov assumption of the model:
 
-1). $$P(S_{t+1} = s^\prime | S_{t} = s) = P(S_{t+1} = s^\prime | S_{1} = s_{1}, S_{2} = s_{2}, \cdots, S_{t} = s)$$, that is, the probability of $S_t = s^\prime$ is independent of all previous hidden states (and observations) given $S_{t} = s$;
+1).
 
-2). $$P(X_{t} = w | S_{t} = s) = P(X_{t} = w | s_{1:T}, x_{1:T})$$, that is, the probability of $X_t$ is independet of all other random variables in the model given $S_t = s$.
+$$P(S_{t+1} = s^\prime | S_{t} = s) = P(S_{t+1} = s^\prime | S_{1} = s_{1}, S_{2} = s_{2}, \cdots, S_{t} = s)$$
+
+, that is, the probability of $S_t = s^\prime$ is independent of all previous hidden states (and observations) given $S_{t} = s$;
+
+2).
+
+$$P(X_{t} = w | S_{t} = s) = P(X_{t} = w | s_{1:T}, x_{1:T})$$
+
+, that is, the probability of $X_t$ is independet of all other random variables in the model given $S_t = s$.
 
 ## Inference
 
