@@ -22,9 +22,7 @@ $$P(S_{t+1} = s^\prime | S_{t} = s)$$
 
 $$P(X_{t} = w | S_{t} = s)$$
 
-.
-
-where $S_t$ denotes the random variable of the hidden state at time $t$, and $X_t$ denotes the randome variable of the observation at time $t$.
+where $w$ denotes a certain observation, $s$/$s^\prime$ denotes a certain hidden state, $S_t$ denotes the random variable of the hidden state at time $t$, and $X_t$ denotes the randome variable of the observation at time $t$.
 
 Note that by the first-order Markov assumption of the model:
 
