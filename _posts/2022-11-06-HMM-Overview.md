@@ -149,7 +149,7 @@ $$
 P(z | x, \theta_t)
 $$
 
-is not always tractible, and hence we need to parameterize $q(z)$ and estimates it using other (often simpler) distributions. Such variation of the EM algorithm is called the **variational EM**, since it involves variational inference (the estimation of $q(z)$).
+is not always tractible, and hence we need to parameterize $q(z)$ and estimates it using other (often simpler) distributions. Such variant of the EM algorithm is known as the **variational EM**, since it involves variational inference (the estimation of $q(z)$). If you are interested in reading more about variational inference and variational EM, I recommend [this post](https://www.cs.jhu.edu/~jason/tutorials/variational.html) by Prof. Jason Eisner.
 
 #### M-step
 
