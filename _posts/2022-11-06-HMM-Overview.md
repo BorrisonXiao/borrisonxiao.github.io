@@ -103,3 +103,76 @@ $$
 $$
 
 where $\mathbb{I}$ is the indicator function.
+
+## Appendix
+
+### EM Overview
+The EM algorithm, as mentioned in the previous section, aims to maximize the incomplete data likelihood, or more precisely, the log-likelihood:
+
+$$
+\begin{align*}
+\mathcal{L}(\theta) = \log{P(x|\theta)} &= \log{\sum_{z} P(x, z | \theta)}\\
+&= \log{\sum_{z} q(z) \frac{P(x, z | \theta)}{q(z)}}\\
+&\geq \underbrace{\sum_{z}q(z) \log{\frac{P(x, z | \theta)}{q(z)}}}_{ELBO}
+\end{align*}
+$$
+
+where $\theta$ is the parameters, $q(z)$ is sometimes called the **variational function**, and the inequality is obtained by **Jensen's inequality**. The lower bound obtained is usually called the Evidence Lower BOund (ELBO) function.
+
+#### E-step
+
+The EM algorithm maximizes the log-likelihood in an iterative manner, mathematically speaking, the algorithm finds a set of parameters that maximize $\mathcal{L}(\theta_t)$ at time $t$ of the iteration. We thus define the ELBO function in a more precise way:
+
+$$
+ELBO(q_t, x | \theta_t) = \sum_{z}q_t(z) \log{\frac{P(x, z | \theta_t)}{q_t(z)}}
+$$
+
+For the convergence of the algorithm (which we will see later), We would like to make
+
+$$
+q(z) = P(z | x, \theta_t)
+$$
+
+. Hence, the ELBO function becomes
+
+$$
+\begin{align*}
+ELBO(q_t, x | \theta_t) &= \sum_{z}q_t(z) \log{\frac{P(x, z | \theta_t)}{q_t(z)}}\\
+&= \sum_{z}P(z | x, \theta_t) \log{\frac{P(x, z | \theta_t)}{P(z | x, \theta_t)}}\\
+&= \sum_{z}P(z | x, \theta_t) \log{P(x | \theta_t)} = \log{P(x | \theta_t)} = \mathcal{L}(\theta_t)
+\end{align*}
+$$
+
+The above step for determining $q(z)$ is the E-step of the EM algorithm.
+
+However, note that the conditional probability
+
+$$
+P(z | x, \theta_t)
+$$
+
+is not always tractible, and hence we need to parameterize $q(z)$ and estimates it using other (often simpler) distributions. Such variation of the EM algorithm is called the **variational EM**, since it involves variational inference (the estimation of $q(z)$).
+
+#### M-step
+
+The M-step is to find a set of parameters to maximize the ELBO function with the updated $q$ function, i.e.
+
+$$
+\begin{align*}
+\theta_{t + 1} &= \displaystyle \argmax_{\theta} ELBO(q_{t + 1}, x | \theta)\\
+&= \displaystyle \argmax_{\theta} \sum_{z}P(z | x, \theta_t) \log{\frac{P(x, z | \theta)}{P(z | x, \theta_t)}}\\
+&= \displaystyle \argmax_{\theta} \sum_{z}P(z | x, \theta_t) \log{P(x, z | \theta)} - \sum_{z}P(z | x, \theta_t) \log{P(z | x, \theta_t)}\\
+&= \displaystyle \argmax_{\theta} \sum_{z}P(z | x, \theta_t) \log{P(x, z | \theta)}\\
+&= \displaystyle \argmax_{\theta} \mathbb{E}_{P(z | x, \theta_t)}[\log{P(x, z | \theta)}]
+\end{align*}
+$$
+
+Note that finding the argmax depends on the specific problem, however, the usual drill is to set the derivative to 0 and solve for the equation.
+
+#### Proof of Convergence
+
+Now we prove the convergence of the EM algorithm, which turns out to be quite simple:
+
+$$
+\mathcal{L}(\theta_{t + 1}) = \log{P(x | \theta_{t + 1})} = ELBO(q_{t+1}, x | \theta_{t+1}) \underbrace{\geq}_{\text{M-step}} ELBO(q_{t+1}, x | \theta_t) \underbrace{=}_{\text{E-step}} \log{P(x | \theta_t)} = \mathcal{L}(\theta_{t})
+$$
