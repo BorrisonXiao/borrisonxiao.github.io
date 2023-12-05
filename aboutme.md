@@ -13,4 +13,4 @@ Cihan (Borrison) Xiao is a PhD student at Johns Hopkins University's [center of 
 
 ### Academic
 
-Cihan is a first-year master's student at Johns Hopkins University advised by Professor [Sanjeev Khudanpur](https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur/). Before that, he was a student at Virginia Tech majoring in computer science.
+Cihan is a first-year PhD student at Johns Hopkins University advised by Professor [Sanjeev Khudanpur](https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur/). Before that, he completed his undergraduate study at Virginia Tech majoring in computer science.
