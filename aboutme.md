@@ -9,7 +9,7 @@ title: About me
 
 <!-- <br clear="left"/> -->
 
-Cihan (Borrison) Xiao is a PhD student at Johns Hopkins University's [center of language and speech processing (CLSP)](https://www.clsp.jhu.edu/). His current research interests lie in speech translation, recognition, as well as speech and natural language processing in general.
+Cihan (Boris) Xiao is a PhD student at Johns Hopkins University's [center of language and speech processing (CLSP)](https://www.clsp.jhu.edu/). His current research interests lie in speech translation, recognition, as well as speech and natural language processing in general.
 
 ### Academic
 
