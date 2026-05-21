@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: blog_post
 title: PCFG Termination
 tags: [NLP]
 ---
@@ -75,7 +75,7 @@ tree1
 
 
 
-![svg](../assets/blogs/PCFG-Termination_files/PCFG-Termination_5_0.svg)
+![svg](/assets/blogs/PCFG-Termination_files/PCFG-Termination_5_0.svg)
 
 
 
@@ -194,7 +194,7 @@ plt.show()
 
 
 
-![png](../assets/blogs/PCFG-Termination_files/PCFG-Termination_12_0.png)
+![png](/assets/blogs/PCFG-Termination_files/PCFG-Termination_12_0.png)
 
 
 

@@ -1,0 +1,70 @@
+primary_name: "Cihan Xiao"
+secondary_name: "肖词瀚"
+navbar_name: "Cihan Xiao"
+
+positions:
+- name: Ph.D. Student
+- name: Johns Hopkins University
+
+email: "cxiao7 [at] jhu [dot] edu"
+gscholar: B9WOPZYAAAAJ
+github: BorrisonXiao
+# cv_link: link-to-your-cv-file
+# twitter: your_twitter_id
+linkedin: cihanxiao
+# orcid: 0000-0000-0000-0000
+
+short_bio_text_justify: false
+short_bio: >-
+  <p>
+    I am a 3rd year PhD student in the <a href="https://www.clsp.jhu.edu/" target="_blank">Center for Language and Speech Processing (CLSP)</a> at <a href="https://www.jhu.edu/" target="_blank">Johns Hopkins University (JHU)</a>, advised by Professor <a href="https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur/" target="_blank">Sanjeev Khudanpur</a>.
+  </p>
+  <p>
+    My research interests include:
+  </p>
+  <ul>
+    <li>Audio / Omni Large Language Models</li>
+    <li>Cross-Modal Reasoning</li>
+    <li>Speech Translation and Recognition</li>
+    <li>Speech / Natural Language Processing</li>
+  </ul>
+  <p>
+    I will be on the job market starting Spring/Fall 2027.
+  </p>
+
+portrait_url: /assets/images/photos/Profile.jpg
+
+education:
+- name: Johns Hopkins University
+  logo: /assets/images/logos/jhu.jpg
+  logo_height: 40
+  dept: Center for Language and Speech Processing (CLSP) / ECE
+  position: Ph.D. Student
+  date: Sep. 2023 - present
+- name: Johns Hopkins University
+  logo: /assets/images/logos/jhu.jpg
+  logo_height: 40
+  dept: Department of Electrical and Computer Engineering
+  position: M.S. in ECE
+  date: Sep. 2021 - May 2023
+- name: Virginia Tech
+  logo: /assets/images/logos/vt.jpg
+  dept: Department of Computer Science
+  position: B.S. in Computer Science
+  date: Sep. 2016 - May 2019
+
+experience:
+- name: Tencent Americas
+  logo: /assets/images/logos/tencent.jpg
+  position: Research Intern
+  date: Spring 2026
+- name: AWS AI Labs
+  logo: /assets/images/logos/aws.png
+  logo_height: 16
+  position: Applied Scientist Intern
+  date: Summer 2025
+- name: AWS AI Labs
+  logo: /assets/images/logos/aws.png
+  logo_height: 16
+  position: Applied Scientist Intern
+  date: Summer 2024

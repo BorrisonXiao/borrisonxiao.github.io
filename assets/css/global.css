@@ -1,0 +1,131 @@
+@charset "utf-8";
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    padding-top: 5.0rem;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 700;
+}
+
+.card {
+    border-radius: 0.8rem!important;
+}
+
+.card-img-overlay {
+    border-radius: 0.8rem!important;
+}
+
+.rounded-xl {
+    border-radius: 0.8rem!important;
+}
+
+.rounded-xl-bottom {
+    border-bottom-right-radius: 0.8rem !important;
+    border-bottom-left-radius: 0.8rem !important;
+}
+
+.rounded-xl-top {
+    border-top-left-radius: 0.8rem !important;
+    border-top-right-radius: 0.8rem !important;
+}
+
+
+.text-profile-position {
+    font-weight: 400;
+}
+
+.text-profile-bio {
+    /* font-family: "Raleway"; */
+    font-weight: 400;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.navbar-brand {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.navbar .nav-link {
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    transition: color 0.15s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #007bff !important;
+}
+
+.navbar .nav-item.active .nav-link {
+    position: relative;
+    color: #007bff !important;
+}
+
+.navbar .nav-item.active .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: #007bff;
+    border-radius: 1px;
+}
+
+.inline-badge {
+    height: 16px;
+    vertical-align: -10%;
+    margin-right: 2px;
+    line-break: unset;
+}
+
+.no-break {
+    white-space: nowrap;
+}
+
+.cover-image {
+    width: 180px;
+    max-height: 120px;
+}
+
+.abstract-body {
+    min-height: 100px;
+}
+
+img.lazy {
+    background-image: url('images/loading.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 50px 50px;
+    min-height: 80px;
+}
+
+div.lazy {
+    background-image: url('images/loading.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 50px 50px;
+    min-height: 80px;
+}
+
+.badge-publication {
+    font-size: 100%;
+}
+
+.email-text {
+    font-family: Source Code Pro, monospace;
+}
