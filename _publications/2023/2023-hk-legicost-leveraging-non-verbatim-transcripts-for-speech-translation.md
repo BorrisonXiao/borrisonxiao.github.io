@@ -20,4 +20,5 @@ links:
   arXiv: https://arxiv.org/abs/2306.11252
   PDF: https://arxiv.org/pdf/2306.11252.pdf
   Semantic Scholar: https://www.semanticscholar.org/paper/74173dec94055d7f4051aa2e80be31ccd2bde596
+  HuggingFace Dataset: https://huggingface.co/datasets/Borrison/hk-legicost
 ---
