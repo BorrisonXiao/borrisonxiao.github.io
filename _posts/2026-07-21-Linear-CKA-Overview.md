@@ -248,6 +248,67 @@ $$
 \langle A,B\rangle_F=\operatorname{tr}(A^\top B).
 $$
 
+This identity is just a compact way to say "multiply corresponding entries and add them up." If $A,B\in\mathbb{R}^{p\times q}$, then the Frobenius inner product is defined as
+
+$$
+\langle A,B\rangle_F
+=\sum_{i=1}^{p}\sum_{j=1}^{q}A_{ij}B_{ij}.
+$$
+
+Now look at $A^\top B\in\mathbb{R}^{q\times q}$. Its $j$-th diagonal entry is
+
+$$
+\left[A^\top B\right]_{jj}
+=\sum_{i=1}^{p}(A^\top)_{ji}B_{ij}
+=\sum_{i=1}^{p}A_{ij}B_{ij}.
+$$
+
+Taking the trace sums these diagonal entries over $j$:
+
+$$
+\operatorname{tr}(A^\top B)
+=\sum_{j=1}^{q}\left[A^\top B\right]_{jj}
+=\sum_{j=1}^{q}\sum_{i=1}^{p}A_{ij}B_{ij}
+=\langle A,B\rangle_F.
+$$
+
+So the trace does not introduce a new notion of similarity; it is the same entrywise dot product, written in matrix form. For example, if
+
+$$
+A=
+\begin{bmatrix}
+1 & 2\\
+3 & 4
+\end{bmatrix},
+\qquad
+B=
+\begin{bmatrix}
+5 & 6\\
+7 & 8
+\end{bmatrix},
+$$
+
+then
+
+$$
+\langle A,B\rangle_F
+=1\cdot5+2\cdot6+3\cdot7+4\cdot8
+=70,
+$$
+
+while
+
+$$
+A^\top B
+=
+\begin{bmatrix}
+26 & 30\\
+38 & 44
+\end{bmatrix},
+\qquad
+\operatorname{tr}(A^\top B)=26+44=70.
+$$
+
 Since $X_cX_c^\top$ is symmetric, we have
 
 $$
