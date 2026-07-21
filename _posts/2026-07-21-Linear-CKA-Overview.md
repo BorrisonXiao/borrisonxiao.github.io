@@ -242,6 +242,81 @@ $$
 \end{align*}
 $$
 
+Here is the algebra behind the last equality. For any two matrices of the same shape,
+
+$$
+\langle A,B\rangle_F=\operatorname{tr}(A^\top B).
+$$
+
+Since $X_cX_c^\top$ is symmetric, we have
+
+$$
+\begin{align*}
+\langle X_cX_c^\top,Y_cY_c^\top\rangle_F
+&=\operatorname{tr}\!\left((X_cX_c^\top)^\top Y_cY_c^\top\right)\\
+&=\operatorname{tr}\!\left(X_cX_c^\top Y_cY_c^\top\right)\\
+&=\operatorname{tr}\!\left(X_c^\top Y_cY_c^\top X_c\right)\\
+&=\operatorname{tr}\!\left((X_c^\top Y_c)(X_c^\top Y_c)^\top\right)\\
+&=\left\|X_c^\top Y_c\right\|_F^2.
+\end{align*}
+$$
+
+The only trick is the cyclic property of trace: matrices inside a trace can be rotated cyclically, so $\operatorname{tr}(ABCD)=\operatorname{tr}(DABC)$. The last line uses the identity $\|M\|_F^2=\operatorname{tr}(MM^\top)$.
+
+A tiny one-feature example makes the same identity more concrete. Suppose
+
+$$
+X_c=x=
+\begin{bmatrix}
+1\\
+-1
+\end{bmatrix},
+\qquad
+Y_c=y=
+\begin{bmatrix}
+2\\
+-2
+\end{bmatrix}.
+$$
+
+Then
+
+$$
+K=xx^\top=
+\begin{bmatrix}
+1 & -1\\
+-1 & 1
+\end{bmatrix},
+\qquad
+L=yy^\top=
+\begin{bmatrix}
+4 & -4\\
+-4 & 4
+\end{bmatrix}.
+$$
+
+The Gram-matrix inner product is
+
+$$
+\langle K,L\rangle_F
+=1\cdot4+(-1)(-4)+(-1)(-4)+1\cdot4
+=16.
+$$
+
+On the other hand,
+
+$$
+X_c^\top Y_c=x^\top y=1\cdot2+(-1)(-2)=4,
+$$
+
+so
+
+$$
+\left\|X_c^\top Y_c\right\|_F^2=4^2=16.
+$$
+
+With multiple features, $X_c^\top Y_c$ simply contains one such cross-feature sum for every pair of features, and the Frobenius norm squares and adds all of them.
+
 The matrix
 
 $$
