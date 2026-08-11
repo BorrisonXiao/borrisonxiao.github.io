@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ page.title }} - {{ site.data.profile.navbar_name }}</title>
+    <!-- Unlisted: not in the site nav, and asked not to be indexed. -->
+    <meta name="robots" content="noindex, nofollow">
     {% if page.summary %}<meta name="description" content="{{ page.summary | strip_html | strip_newlines | truncate: 180 }}">{% endif %}
 
     <!-- Stylesheets -->
@@ -23,14 +25,14 @@
     <link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100" {{ page.body_attr }}>
-    {% include navbar.html active_page="Interview Prep" %}
+    {% include navbar.html active_page="Blog" %}
 
     <main class="flex-grow-1">
         <div class="blog-layout-wrapper">
             <div class="blog-main">
 
                 <nav class="q-breadcrumb" aria-label="breadcrumb">
-                    <a href="{{ '/interview-prep/' | relative_url }}">Interview Prep</a>
+                    <a href="{{ '/interview-prep/' | relative_url }}">Practice Problems</a>
                     <i class="fas fa-angle-right"></i>
                     <a href="{{ '/interview-prep/' | relative_url }}#{{ page.topic }}">
                         {% if topic %}<i class="{{ topic.icon }}"></i> {{ topic.name }}{% else %}{{ page.topic }}{% endif %}
@@ -68,7 +70,7 @@
                 </article>
 
                 {% if page.concepts %}
-                <section class="q-concepts bg-white rounded-xl p-4 mb-4">
+                <section class="q-concepts bg-white rounded-xl p-4 mb-4" data-q-gated>
                     <h2 class="q-concepts-title"><i class="fas fa-book-open"></i> Core concepts behind this question</h2>
                     <p class="q-concepts-lead text-muted small">
                         Every idea the solution leans on, with a pointer to where to read more.
@@ -88,7 +90,7 @@
                 {% endif %}
 
                 {% if page.references %}
-                <section class="q-refs bg-white rounded-xl p-4 mb-4">
+                <section class="q-refs bg-white rounded-xl p-4 mb-4" data-q-gated>
                     <h2 class="q-concepts-title"><i class="fas fa-graduation-cap"></i> Where this lives in the standard texts</h2>
                     <ul class="q-ref-list">
                         {% for r in page.references %}
@@ -163,7 +165,7 @@
             Prism.highlightAll();
         });
     </script>
-    <script src="{{ '/assets/js/blog.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/interview_question.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/bubble_visual_hash.js' | relative_url }}"></script>
     {% for s in page.scripts %}

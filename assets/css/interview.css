@@ -407,6 +407,82 @@
 }
 .q-callout-note .q-callout-title { color: #55606a; }
 
+/* ---------- The master "show the solution" gate ---------- */
+
+.q-solution {
+    border: 1px solid #d9e6fb;
+    border-radius: 0.7rem;
+    background: #fff;
+    margin: 1.75rem 0 1rem;
+    overflow: hidden;
+}
+
+.q-solution > summary.q-solution-summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--prep-accent);
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.q-solution > summary.q-solution-summary:hover {
+    background: #0069d9;
+}
+
+.q-solution > summary::-webkit-details-marker { display: none; }
+
+.q-solution > summary.q-solution-summary::before {
+    content: "\f06e"; /* eye */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.9em;
+}
+
+.q-solution[open] > summary.q-solution-summary::before {
+    content: "\f070"; /* eye-slash */
+}
+
+.q-solution[open] > summary.q-solution-summary {
+    background: #f8fafc;
+    color: #55606a;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--prep-line);
+    justify-content: flex-start;
+}
+
+.q-solution[open] > summary.q-solution-summary:hover {
+    background: #eef2f6;
+}
+
+.q-solution-body {
+    padding: 0.25rem 1.35rem 1rem;
+}
+
+/* swap the summary label without needing JS */
+.q-solution .q-when-open,
+.q-solution[open] .q-when-closed { display: none; }
+.q-solution[open] .q-when-open { display: inline; }
+
+.q-content .q-solution-body > h2:first-child {
+    margin-top: 1.25rem;
+}
+
+.q-practice-note {
+    font-size: 0.85rem;
+    color: var(--prep-muted);
+    text-align: center;
+    margin: 0.75rem 0 0;
+}
+
 /* ---------- Reveal (details/summary) ---------- */
 
 .q-reveal {

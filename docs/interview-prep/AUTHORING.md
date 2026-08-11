@@ -4,6 +4,12 @@ This covers the interview-prep sub-site only. It is kept separate from the rest
 of the homepage on purpose. `docs/` is in the Jekyll `exclude` list, so nothing
 here is published.
 
+**The sub-site is unlisted on purpose.** It is not in `_data/navigation.yml`,
+its pages carry `noindex, nofollow`, and the only route in is a small line at the
+top of `blog.html`. It shows up publicly as "Practice Problems"; the
+`/interview-prep/` URL and the directory names are internal. Do not add it to the
+nav.
+
 ## Layout of the sub-site
 
 ```
@@ -81,17 +87,45 @@ concept it rests on is the point of the page. Fill them in.
 
 ## What a write-up should contain
 
-The structure that has worked so far:
+**The solution is hidden by default.** Only the problem statement is visible when
+the page loads; everything else sits behind one "Show the solution" toggle, so
+the page works as practice rather than as reading. The concepts and references
+panels are gated on the same toggle automatically (they carry `data-q-gated` in
+the layout, and `assets/js/interview_question.js` keeps them in sync).
 
-1. **Problem box**, then a nudge to try it before revealing anything.
-2. **Revealable short answers**, plus the two or three ways people get it wrong.
-3. **The theory**, derived rather than asserted. Multiple derivations of the
-   same fact are worth the space when they illuminate different things.
-4. **Why the field cares** — where this shows up in real work.
-5. **Extensions and traps** — edge cases, conventions, numerical conditioning.
-6. **Code** — the vectorized/library way to do it.
-7. **Drills** with revealable solutions.
-8. **Follow-ups** an interviewer would chain onto the question.
+So the body of a question file is:
+
+```
+[intro sentence, optional]
+<div class="q-problem"> … the question … </div>
+Work them on paper first — that is what the page is for.
+
+<details class="q-solution" id="solution">   ← id="solution" is required
+<summary class="q-solution-summary"><span class="q-when-closed">Show the solution</span><span class="q-when-open">Hide the solution</span></summary>
+<div class="q-solution-body" markdown="1">
+
+  … the entire solution, including the visualizations …
+
+</div>
+</details>
+
+## More practice
+… drills, each in its own <details class="q-reveal"> …
+```
+
+Drills stay outside the gate — they are practice too — with their own reveals.
+
+Inside the solution, the structure that has worked:
+
+1. **The answers** up front, plus the two or three ways people get it wrong.
+2. **The theory**, derived rather than asserted.
+3. **Why the field cares** — where this shows up in real work.
+4. **The traps** — edge cases and conventions worth naming.
+5. **Code** — the vectorized/library way to do it.
+
+Keep it to the basics. Depth is good; breadth into advanced side-topics makes
+the page unusable as a refresher. If something is a tangent, cut it or leave it
+as a one-line pointer.
 
 ## Markup available in the body
 

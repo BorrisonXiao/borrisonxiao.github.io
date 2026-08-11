@@ -5,5 +5,5 @@ pages:
   url: /publications
 - name: Blog
   url: /blog
-- name: Interview Prep
-  url: /interview-prep/
+# /interview-prep/ is deliberately NOT listed here. It is unlisted: reachable
+# from a small link on the blog page, and marked noindex.

@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Interview Prep
-navbar_title: Interview Prep
+title: Practice Problems
+navbar_title: Blog
 permalink: /interview-prep/
+noindex: true
 ---
 
 {% assign topics = site.data.interview_topics %}
@@ -12,13 +13,12 @@ permalink: /interview-prep/
 <link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}">
 
 <div class="prep-hero mb-4">
-    <h1 class="mb-2">Interview Prep</h1>
+    <h1 class="mb-2">Practice Problems</h1>
     <p class="text-muted mb-3">
-        A running set of practice problems I use to keep the fundamentals warm.
-        Each one is written up as a full solution rather than a scratch answer:
-        the underlying theory, why the standard pitfalls are pitfalls, an
-        extension or two, and a visualization wherever a picture beats a
-        paragraph. Pick a tab below.
+        A running set of problems I work through to keep the fundamentals warm.
+        Each one opens with just the question — the solution stays folded away
+        until you ask for it, so the page can be used as practice rather than as
+        reading. Pick a tab below.
     </p>
     <div class="prep-stats">
         <span class="prep-stat"><strong>{{ total }}</strong> question{% if total != 1 %}s{% endif %}</span>
