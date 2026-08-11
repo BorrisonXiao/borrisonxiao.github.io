@@ -55,6 +55,112 @@ references:
       form, arguments, powers, and roots.
 ---
 
+New to this, or just cold? Open the example first. Otherwise go straight to the problem.
+
+<details class="q-example" id="example">
+<summary class="q-example-summary"><span class="q-when-closed">Show a worked example first</span><span class="q-when-open">Hide the example</span></summary>
+<div class="q-example-body" markdown="1">
+
+### What a complex number is
+
+**Algebraically**, you invent one new symbol $j$ with the single property
+
+$$
+j^2 = -1 ,
+$$
+
+and a complex number is anything of the form
+
+$$
+z = a + jb, \qquad a, b \in \mathbb{R},
+$$
+
+where $a = \Re z$ is the *real part* and $b = \Im z$ is the *imaginary part*. (Signal processing writes $j$ where mathematics writes $i$, because $i$ was already taken by current. Nothing else changes.) From there you just do ordinary algebra and replace $j^2$ by $-1$ whenever it appears:
+
+$$
+(a + jb) + (c + jd) = (a+c) + j(b+d),
+$$
+
+$$
+(a + jb)(c + jd) = ac + jad + jbc + \underbrace{j^2}_{-1}bd = (ac - bd) + j(ad + bc).
+$$
+
+Two more definitions you will use constantly. The **conjugate** flips the sign of the imaginary part, $\bar z = a - jb$, and the point of it is that
+
+$$
+z\bar z = (a+jb)(a-jb) = a^2 + b^2 ,
+$$
+
+which is real and non-negative. Its square root is the **modulus** $\lvert z\rvert = \sqrt{a^2+b^2}$.
+
+**Geometrically**, $z = a + jb$ is just the point $(a, b)$ — or the arrow from the origin to it — in a plane whose horizontal axis measures the real part and whose vertical axis measures the imaginary part. That picture is called the complex plane. In it:
+
+- **adding** two complex numbers is adding two arrows, tip to tail, exactly as with vectors;
+- $\lvert z \rvert$ is the **length** of the arrow, i.e. its distance from the origin;
+- the **argument** $\arg z$ is the angle the arrow makes with the positive real axis, measured counter-clockwise;
+- **multiplying** stretches and rotates — more on that in the solution.
+
+So an arrow can be named two ways: by its components $(a, b)$, or by its length and direction $(r, \theta)$. That is the whole of this question.
+
+$$
+z = \underbrace{a + jb}_{\text{rectangular}} = \underbrace{r\,e^{j\theta}}_{\text{polar}}
+$$
+
+The exponential in the polar form is **Euler's formula**,
+
+$$
+e^{j\theta} = \cos\theta + j\sin\theta ,
+$$
+
+which says that $e^{j\theta}$ is the point you reach by walking $\theta$ radians counter-clockwise around the unit circle starting from $1$. It is pure direction with length $1$, so in $re^{j\theta}$ the $r$ carries all the length and the $\theta$ carries all the direction.
+
+### Worked example: $z = 1 + j$
+
+**Locate it.** $a = 1$, $b = 1$: one step right, one step up. Both parts positive, so it is in the first quadrant.
+
+**Get the modulus.** It is the hypotenuse of a right triangle with legs $a$ and $b$:
+
+$$
+r = \sqrt{a^2 + b^2} = \sqrt{1 + 1} = \sqrt2 \approx 1.4142 .
+$$
+
+**Get the argument.** In the first quadrant the arrow's angle satisfies $\tan\theta = b/a$, so
+
+$$
+\theta = \arctan\frac{b}{a} = \arctan 1 = \frac{\pi}{4} = 45^\circ ,
+$$
+
+which is what the picture says too — equal legs means the $45^\circ$ diagonal.
+
+**Write it down.**
+
+$$
+z = \sqrt2\,e^{j\pi/4}
+  = \sqrt2\left(\cos\tfrac{\pi}{4} + j\sin\tfrac{\pi}{4}\right)
+  \quad\text{or, in the angle notation,}\quad \sqrt2 \angle 45^\circ .
+$$
+
+**Check by converting back.** $\sqrt2\cos\frac{\pi}{4} = \sqrt2\cdot\frac{\sqrt2}{2} = 1$ and $\sqrt2\sin\frac{\pi}{4} = 1$, so we land on $1 + j$ again. Always do this — it costs five seconds and catches every sign error.
+
+Drag the point around and watch the four numbers move together.
+
+<div class="viz" data-viz="argand-explorer">
+  <div class="viz-head">
+    <p class="viz-title">Interactive &middot; the complex plane</p>
+    <p class="viz-sub">Start on the "1 + j" preset to see the example above. Then drag the blue point, or click the canvas and use the arrow keys. The shaded wedge is the argument, the spoke is the modulus, and the dotted lines are the rectangular coordinates.</p>
+  </div>
+</div>
+
+<div class="q-callout q-callout-trap" markdown="1">
+<div class="q-callout-title"><i class="fas fa-triangle-exclamation"></i> One catch before you start</div>
+
+That $\theta = \arctan(b/a)$ step worked because $1 + j$ sits in the first quadrant. Drag the point into the left half of the plane and the widget's last readout starts disagreeing with the true angle. Handling that is most of what the problem below is testing.
+
+</div>
+
+</div>
+</details>
+
 <div class="q-problem" markdown="1">
 <div class="q-problem-label">Problem</div>
 
@@ -104,17 +210,9 @@ The three ways this goes wrong, in order of how often I have seen them:
 - **$z_3$ comes out as $-\pi$.** Right modulo $2\pi$, but not the principal value: the interval $(-\pi, \pi]$ is closed at the top, so the negative real axis gets $+\pi$.
 - **$z_4$ makes people reach for $\arctan(b/a)$ and divide by zero.** $\operatorname{atan2}(-2, 0)$ answers $-\pi/2$ without blinking.
 
-## The same point, two sets of labels
+## Why bother with polar at all
 
-A complex number is a point in a plane, and there are two standard ways to name it:
-
-$$
-z = \underbrace{a + jb}_{\text{rectangular}} = \underbrace{r e^{j\theta}}_{\text{polar}} .
-$$
-
-(Signal processing writes $j$ where mathematics writes $i$, because $i$ was already taken by current. Nothing else changes.)
-
-Neither is more correct. They are good at different things, and that is the only reason to convert between them:
+Rectangular and polar name the same point, and neither is more correct. They are good at different things, and that is the only reason to convert between them:
 
 - **Rectangular makes addition trivial.** $(a_1 + jb_1) + (a_2 + jb_2) = (a_1+a_2) + j(b_1+b_2)$. It tells you nothing useful about products.
 - **Polar makes multiplication trivial.** $r_1 r_2 e^{j(\theta_1+\theta_2)}$ — moduli multiply, arguments add. It tells you nothing useful about sums.
@@ -170,22 +268,13 @@ plus the axes, which $\arctan$ cannot reach at all: $\theta = \pi/2$ for $a=0, b
 
 The pattern in that last column is the whole of `atan2`: add $\pi$ with the sign of $b$ whenever $a < 0$, otherwise do nothing.
 
-Drag the point below into the left half plane and watch the two answers come apart.
-
-<div class="viz" data-viz="argand-explorer">
-  <div class="viz-head">
-    <p class="viz-title">Interactive &middot; the complex plane</p>
-    <p class="viz-sub">Drag the blue point, or click the canvas and use the arrow keys. The shaded wedge is the argument, the spoke is the modulus, and the dotted lines are the rectangular coordinates. The last readout is the naive answer; the warning fires whenever it disagrees with the truth.</p>
-  </div>
-</div>
-
-The <code>convention</code> button relabels the angle as $[0, 2\pi)$ instead of $(-\pi, \pi]$. Notice the point does not move — only the label does. Both are correct, which is why you have to say which convention you are using.
+To watch this happen, open the [worked example](#example) above and drag the point into the left half of the plane: the widget's last readout is the naive $\arctan(b/a)$, and it flags every disagreement. Its <code>convention</code> button also relabels the angle as $[0, 2\pi)$ instead of $(-\pi, \pi]$ — notice the point does not move, only the label does. Both are correct, which is exactly why you have to say which one you are using.
 
 ## Working through the five
 
 The recipe: modulus by Pythagoras, reference angle from the magnitudes, quadrant from the signs.
 
-**$z_1 = 1 + j$.** $r = \sqrt{1+1} = \sqrt2$. Quadrant I, $\arctan(1/1) = \pi/4$, no correction. So $z_1 = \sqrt{2}\,e^{j\pi/4}$.
+**$z_1 = 1 + j$.** Done in the example: $r = \sqrt2$, quadrant I so no correction, $\theta = \arctan 1 = \pi/4$, giving $z_1 = \sqrt{2}\,e^{j\pi/4}$.
 
 **$z_2 = -1 + j\sqrt3$.** $r = \sqrt{1+3} = 2$. The *reference* angle — the acute angle to the real axis — is $\arctan(\lvert b\rvert/\lvert a\rvert) = \arctan\sqrt3 = \pi/3$. Quadrant II, so $\theta = \pi - \pi/3 = 2\pi/3 = 120^\circ$, giving $z_2 = 2e^{j2\pi/3}$. Had you written $\arctan(-\sqrt3) = -\pi/3$ you would have named the point $-1 - j\sqrt3$, which is $z_2$ reflected through the origin — precisely the ambiguity the ratio cannot resolve.
 
@@ -221,11 +310,11 @@ $$
 
 That is the point of the exercise. A magnitude response and a phase response are not extra concepts bolted onto complex numbers — they *are* $r$ and $\theta$, computed once per frequency.
 
-## Euler's formula, and why we write $e^{j\theta}$
+## Where Euler's formula comes from
 
-Nothing so far needed the exponential; we could have written $r\angle\theta$ and stopped. The reason for $e^{j\theta}$ is that the exponential is the function that turns addition into multiplication, which is exactly the structure polar coordinates are exposing.
+The example took $e^{j\theta} = \cos\theta + j\sin\theta$ on trust, and nothing so far has actually needed the exponential — we could have written $r\angle\theta$ and stopped. The reason for the exponential notation is that the exponential is *the* function that turns addition into multiplication, which is exactly the structure polar coordinates are exposing.
 
-Feed $j\theta$ to the exponential series:
+As for why it is true, feed $j\theta$ to the exponential series:
 
 $$
 e^{j\theta} = \sum_{n=0}^{\infty} \frac{(j\theta)^n}{n!} .

@@ -407,6 +407,60 @@
 }
 .q-callout-note .q-callout-title { color: #55606a; }
 
+/* ---------- The optional worked example, above the problem ---------- */
+
+.q-example {
+    border: 1px solid #cfe6d6;
+    border-radius: 0.7rem;
+    background: #fff;
+    margin: 1.25rem 0 1.5rem;
+    overflow: hidden;
+}
+
+.q-example > summary.q-example-summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1.15rem;
+    font-size: 0.87rem;
+    font-weight: 600;
+    color: #1e7e42;
+    background: #f3f9f4;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.q-example > summary.q-example-summary:hover {
+    background: #e8f3ec;
+}
+
+.q-example > summary::-webkit-details-marker { display: none; }
+
+.q-example > summary.q-example-summary::before {
+    content: "\f5da"; /* chalkboard-user */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.9em;
+}
+
+.q-example[open] > summary.q-example-summary {
+    border-bottom: 1px solid #cfe6d6;
+}
+
+.q-example-body {
+    padding: 0.25rem 1.35rem 1rem;
+}
+
+.q-example .q-when-open,
+.q-example[open] .q-when-closed { display: none; }
+.q-example[open] .q-when-open { display: inline; }
+
+.q-content .q-example-body > h3:first-child {
+    margin-top: 1.25rem;
+}
+
 /* ---------- The master "show the solution" gate ---------- */
 
 .q-solution {

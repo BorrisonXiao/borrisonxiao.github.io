@@ -76,27 +76,54 @@
 
     /* ---- gating ---------------------------------------------------------- */
 
-    function sync() {
+    function sync(justOpened) {
         var open = solution ? solution.open : true;
         gated.forEach(function (g) { g.hidden = !open; });
         buildToc();
         /* Canvas widgets inside a closed <details> measured zero width, so tell
          * them to re-fit now that they have a real box. */
-        if (open) {
+        if (justOpened) {
             window.setTimeout(function () {
                 window.dispatchEvent(new Event('resize'));
             }, 60);
         }
     }
 
-    if (solution) {
-        solution.addEventListener('toggle', sync);
-        /* Following a link into a heading inside the solution should open it. */
-        window.addEventListener('hashchange', function () {
-            var target = document.getElementById((location.hash || '').replace(/^#/, ''));
-            if (target && solution.contains(target) && !solution.open) solution.open = true;
+    /* Any collapsible on the page can hold headings or widgets, so re-sync on
+     * all of them, not just the solution. */
+    if (content) {
+        Array.prototype.forEach.call(content.querySelectorAll('details'), function (d) {
+            d.addEventListener('toggle', function () { sync(d.open); });
         });
     }
 
-    sync();
+    /* Following a link to something inside a collapsed section should open it. */
+    function openForHash() {
+        var id = (location.hash || '').replace(/^#/, '');
+        if (!id || !content) return;
+        var target = document.getElementById(id);
+        if (!target) return;
+        var opened = false;
+        var node = target;
+        while (node && node !== content) {
+            if (node.tagName === 'DETAILS' && !node.open) { node.open = true; opened = true; }
+            node = node.parentNode;
+        }
+        if (opened) {
+            sync(true);
+            window.setTimeout(function () {
+                window.scrollTo({ top: target.offsetTop - navbarHeight, behavior: 'smooth' });
+            }, 80);
+        }
+    }
+    window.addEventListener('hashchange', openForHash);
+    document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!a) return;
+        /* Let the hash land first, then expand whatever it points into. */
+        window.setTimeout(openForHash, 0);
+    });
+
+    sync(false);
+    openForHash();
 })();

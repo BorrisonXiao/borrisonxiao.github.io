@@ -93,10 +93,30 @@ the page works as practice rather than as reading. The concepts and references
 panels are gated on the same toggle automatically (they carry `data-q-gated` in
 the layout, and `assets/js/interview_question.js` keeps them in sync).
 
+A question page opens with an equally-collapsed **example**: one very simple
+instance of the same task, worked end to end, with the definitions someone would
+need if they are cold. It comes *before* the problem, so the page reads
+learn → attempt → check.
+
 So the body of a question file is:
 
 ```
-[intro sentence, optional]
+[one orienting sentence]
+
+<details class="q-example" id="example">     ← id="example" is required
+<summary class="q-example-summary"><span class="q-when-closed">Show a worked example first</span><span class="q-when-open">Hide the example</span></summary>
+<div class="q-example-body" markdown="1">
+
+### What a <thing> is
+  … the definitions, algebraic and geometric. Short. ~600 words for the
+    whole example section is about right.
+### Worked example: <the simplest case>
+  … every step, including the check at the end, then the visualization that
+    explains the concept …
+
+</div>
+</details>
+
 <div class="q-problem"> … the question … </div>
 Work them on paper first — that is what the page is for.
 
@@ -104,7 +124,7 @@ Work them on paper first — that is what the page is for.
 <summary class="q-solution-summary"><span class="q-when-closed">Show the solution</span><span class="q-when-open">Hide the solution</span></summary>
 <div class="q-solution-body" markdown="1">
 
-  … the entire solution, including the visualizations …
+  … the full solution …
 
 </div>
 </details>
@@ -115,6 +135,9 @@ Work them on paper first — that is what the page is for.
 
 Drills stay outside the gate — they are practice too — with their own reveals.
 
+Use `###` inside the example and `##` inside the solution, so the table of
+contents nests sensibly when both are open.
+
 Inside the solution, the structure that has worked:
 
 1. **The answers** up front, plus the two or three ways people get it wrong.
@@ -122,6 +145,10 @@ Inside the solution, the structure that has worked:
 3. **Why the field cares** — where this shows up in real work.
 4. **The traps** — edge cases and conventions worth naming.
 5. **Code** — the vectorized/library way to do it.
+
+Do not repeat the example inside the solution. Where they overlap — the easy
+case in the worked-solutions list, say — reduce it to a line and link back with
+`[the example](#example)`. Links into a collapsed section auto-expand it.
 
 Keep it to the basics. Depth is good; breadth into advanced side-topics makes
 the page unusable as a refresher. If something is a tangent, cut it or leave it
