@@ -34,14 +34,20 @@ plugins: []
 # timezone: Asia/Shanghai
 
 collections:
-  - publications
-  - news
-  - showcase
-  - posts
+  publications:
+  news:
+  showcase:
+  posts:
+  # Interview / technical-refresher practice questions. One file per question,
+  # filed under _interview/<topic-slug>/. See docs/interview-prep/AUTHORING.md.
+  interview:
+    output: true
+    permalink: /interview-prep/:path/
 
 exclude:
   - vendor
   - envs
+  - docs
   - old_homepage
   - template_homepage
   - Gemfile

@@ -1,0 +1,98 @@
+# Sub-tabs for the /interview-prep/ page.
+#
+# The order of this list is the order of the tabs. `slug` must match both the
+# directory name under _interview/ and the `topic:` field in the front matter
+# of every question in that tab. See docs/interview-prep/AUTHORING.md.
+#
+# `icon`    Font Awesome 6 free-solid class (already loaded site-wide).
+# `planned` Optional. Shown in the empty state so a topic with no questions
+#           yet still says what it is going to cover.
+
+- slug: signal-processing
+  name: Signal Processing
+  short: DSP
+  icon: fas fa-wave-square
+  blurb: >-
+    Complex arithmetic and phasors, Fourier and z-transforms, sampling and
+    aliasing, LTI systems and filter design, and the time-frequency dualities
+    that tie them together.
+  planned:
+    - Sampling, aliasing, and the reconstruction theorem
+    - Convolution and correlation by hand
+    - DFT vs. DTFT vs. z-transform — what each one is for
+    - Minimum phase, linear phase, and group delay
+    - Windowing, spectral leakage, and resolution
+
+- slug: probability
+  name: Probability Theory
+  short: Probability
+  icon: fas fa-dice
+  blurb: >-
+    Conditioning and Bayes, the common distributions and how they relate,
+    expectation tricks, concentration and limit theorems, and stochastic
+    processes.
+  planned:
+    - Conditioning as the one true technique (tower property, LOTV)
+    - The exponential family and conjugate priors
+    - Order statistics and the "expected max" family of puzzles
+    - Concentration - Markov, Chebyshev, Chernoff, Hoeffding
+    - Markov chains - stationarity, mixing, hitting times
+
+- slug: linear-algebra
+  name: Linear Algebra
+  short: Linear Algebra
+  icon: fas fa-vector-square
+  blurb: >-
+    The four fundamental subspaces, eigen- and singular-value decompositions,
+    projections and least squares, matrix calculus, and numerical conditioning.
+  planned:
+    - Least squares three ways - normal equations, QR, SVD
+    - What the SVD actually tells you about a matrix
+    - Eigenvalues vs. singular values - when they coincide
+    - Matrix calculus without index gymnastics
+    - Condition number, and why the normal equations square it
+
+- slug: convex-optimization
+  name: Convex Optimization
+  short: Convex Opt
+  icon: fas fa-bezier-curve
+  blurb: >-
+    Convex sets and functions, duality and the KKT conditions, gradient and
+    proximal methods, convergence rates, and how to recognize a convex problem
+    hiding in a non-convex costume.
+  planned:
+    - Proving convexity - the three reliable routes
+    - Lagrangian duality and what the dual variables mean
+    - KKT conditions on a worked example
+    - Gradient descent rates - smooth, strongly convex, and neither
+    - Proximal operators and why L1 gives you sparsity
+
+- slug: information-theory
+  name: Information Theory
+  short: Info Theory
+  icon: fas fa-tower-broadcast
+  blurb: >-
+    Entropy, mutual information and the chain rules, KL divergence and its many
+    disguises in estimation and machine learning, source and channel coding,
+    and rate-distortion.
+  planned:
+    - Entropy, cross-entropy, KL - which is which and why it matters
+    - Mutual information as a distance from independence
+    - The data processing inequality and its uses
+    - Source coding - Huffman, arithmetic, and the entropy bound
+    - Channel capacity and the AWGN formula
+
+- slug: ode
+  name: ODEs & Dynamical Systems
+  short: ODEs
+  icon: fas fa-infinity
+  blurb: >-
+    Linear systems and the matrix exponential, phase-plane analysis, stability
+    and fixed points - the continuous-time view of the same machinery that
+    shows up as filters and recurrences elsewhere on this page.
+  planned:
+    - Solving linear systems with the matrix exponential
+    - Phase portraits and classification of 2D fixed points
+    - Stability - Lyapunov, linearization, and their limits
+    - Stiffness and what it does to numerical solvers
+    - Continuous-time filters as ODEs, and their discrete twins

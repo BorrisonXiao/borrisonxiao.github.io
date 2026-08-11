@@ -1,0 +1,36 @@
+{% assign item = include.item %}
+{% assign topic = include.topic %}
+
+{% case item.difficulty %}
+  {% when 'warm-up' %}{% assign diff_class = 'prep-diff-warmup' %}
+  {% when 'core' %}{% assign diff_class = 'prep-diff-core' %}
+  {% when 'stretch' %}{% assign diff_class = 'prep-diff-stretch' %}
+  {% else %}{% assign diff_class = 'prep-diff-core' %}
+{% endcase %}
+
+{% capture search_blob %}{{ item.title }} {{ item.summary }} {{ item.tags | join: ' ' }}{% endcapture %}
+
+<a class="prep-card"
+   href="{{ item.url | relative_url }}"
+   data-prep-item
+   data-search="{{ search_blob | strip_html | strip_newlines | downcase | escape }}">
+    <div class="prep-card-head">
+        <h5 class="prep-card-title">{{ item.title }}</h5>
+        {% if item.difficulty %}
+        <span class="prep-diff {{ diff_class }}">{{ item.difficulty }}</span>
+        {% endif %}
+    </div>
+
+    {% if item.summary %}
+    <p class="prep-card-summary">{{ item.summary | strip_html }}</p>
+    {% endif %}
+
+    <div class="prep-card-foot">
+        {% if item.tags %}
+        <span class="prep-card-tags">
+            {% for tag in item.tags %}<span class="prep-tag">{{ tag }}</span>{% endfor %}
+        </span>
+        {% endif %}
+        <span class="prep-card-go">Open <i class="fas fa-angle-right"></i></span>
+    </div>
+</a>
