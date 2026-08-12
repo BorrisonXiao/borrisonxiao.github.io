@@ -76,22 +76,17 @@
 
 /* ---------- Landing page: tabs ---------- */
 
+/* The pill row wraps. It used to be a nowrap strip with a hidden scrollbar,
+   which meant any tab past the right edge was both invisible and unreachable
+   with a mouse. Wrapping makes that impossible rather than merely navigable. */
 .prep-tabs-wrap {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
     border-bottom: 1px solid var(--prep-line);
-    padding-bottom: 0.5rem;
-}
-
-.prep-tabs-wrap::-webkit-scrollbar {
-    height: 0;
+    padding-bottom: 0.65rem;
 }
 
 .prep-tabs {
-    flex-wrap: nowrap;
-    gap: 0.3rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 }
 
 .prep-tabs .nav-link {
@@ -149,6 +144,67 @@
 
 .prep-tab-count-zero {
     opacity: 0.55;
+}
+
+/* "All" reads as a mode rather than a subject, so it sits slightly apart. */
+.prep-tabs .nav-link.prep-tab-all {
+    background: #f1f3f5;
+    border-color: #e3e7ea;
+}
+
+.prep-tabs .nav-link.prep-tab-all:hover {
+    background: #fff;
+}
+
+.prep-tabs .nav-link.prep-tab-all.active {
+    background-color: var(--prep-accent);
+    border-color: var(--prep-accent);
+}
+
+/* ---------- Topic groups inside the "All" tab ---------- */
+
+.prep-group {
+    margin-bottom: 2rem;
+}
+
+.prep-group[hidden] { display: none; }
+
+.prep-group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a949e;
+    margin: 0 0 0.7rem;
+}
+
+.prep-group-title i {
+    font-size: 0.95em;
+    color: #b6bfc7;
+}
+
+.prep-group-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.prep-group-title a:hover {
+    color: var(--prep-accent);
+}
+
+.prep-group-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #aab3bb;
+    background: #f1f3f5;
+    border-radius: 1rem;
+    padding: 0 0.4em;
+    min-width: 1.35em;
+    text-align: center;
 }
 
 @media (max-width: 767.98px) {

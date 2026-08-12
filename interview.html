@@ -38,17 +38,32 @@ noindex: true
 
 <div class="prep-tabs-wrap mb-3">
     <ul class="nav nav-pills prep-tabs" id="prep-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link prep-tab-all active"
+               id="prep-tab-all"
+               data-toggle="pill"
+               data-slug="all"
+               href="#prep-pane-all"
+               role="tab"
+               aria-controls="prep-pane-all"
+               aria-selected="true">
+                <i class="fas fa-layer-group prep-tab-icon"></i>
+                <span class="prep-tab-name">All</span>
+                <span class="prep-tab-name-short">All</span>
+                <span class="prep-tab-count{% if total == 0 %} prep-tab-count-zero{% endif %}">{{ total }}</span>
+            </a>
+        </li>
         {% for topic in topics %}
         {% assign qs = all_questions | where: "topic", topic.slug %}
         <li class="nav-item">
-            <a class="nav-link{% if forloop.first %} active{% endif %}"
+            <a class="nav-link"
                id="prep-tab-{{ topic.slug }}"
                data-toggle="pill"
                data-slug="{{ topic.slug }}"
                href="#prep-pane-{{ topic.slug }}"
                role="tab"
                aria-controls="prep-pane-{{ topic.slug }}"
-               aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+               aria-selected="false">
                 <i class="{{ topic.icon }} prep-tab-icon"></i>
                 <span class="prep-tab-name">{{ topic.name }}</span>
                 <span class="prep-tab-name-short">{{ topic.short | default: topic.name }}</span>
@@ -60,9 +75,45 @@ noindex: true
 </div>
 
 <div class="tab-content" id="prep-tab-content">
+
+    <div class="tab-pane fade show active" id="prep-pane-all" role="tabpanel" aria-labelledby="prep-tab-all">
+        <p class="prep-topic-blurb">
+            Everything on the page, grouped by topic. The tabs above narrow it to
+            one subject at a time.
+        </p>
+
+        {% if total > 0 %}
+        {% for topic in topics %}
+        {% assign qs = all_questions | where: "topic", topic.slug | sort: "order" %}
+        {% if qs.size > 0 %}
+        <div class="prep-group" data-prep-group>
+            <h2 class="prep-group-title">
+                <i class="{{ topic.icon }}"></i>
+                <a href="#{{ topic.slug }}" data-prep-jump="{{ topic.slug }}">{{ topic.name }}</a>
+                <span class="prep-group-count">{{ qs | size }}</span>
+            </h2>
+            <div class="prep-list" data-prep-list>
+                {% for item in qs %}
+                {% include widgets/interview_card.html item=item topic=topic %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <p class="prep-no-match text-muted small mt-3" data-prep-no-match hidden>
+            Nothing matches the filter.
+        </p>
+        {% else %}
+        <div class="prep-empty">
+            <div class="prep-empty-icon"><i class="fas fa-layer-group"></i></div>
+            <div class="prep-empty-title">Nothing written up yet</div>
+        </div>
+        {% endif %}
+    </div>
+
     {% for topic in topics %}
     {% assign qs = all_questions | where: "topic", topic.slug | sort: "order" %}
-    <div class="tab-pane fade{% if forloop.first %} show active{% endif %}"
+    <div class="tab-pane fade"
          id="prep-pane-{{ topic.slug }}"
          role="tabpanel"
          aria-labelledby="prep-tab-{{ topic.slug }}">

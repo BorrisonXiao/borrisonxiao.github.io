@@ -43,6 +43,14 @@
         });
     });
 
+    /* Group headings in the "All" tab jump to that topic's own tab. */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-prep-jump]'), function (a) {
+        a.addEventListener('click', function (e) {
+            e.preventDefault();
+            activate(a.getAttribute('data-prep-jump'), true);
+        });
+    });
+
     /* ---- Filtering ------------------------------------------------------ */
 
     var filter = document.getElementById('prep-filter');
@@ -70,6 +78,13 @@
             if (slug) visible[slug] = (visible[slug] || 0) + (hit ? 1 : 0);
         });
 
+        /* A topic heading in the "All" tab goes away when the filter has
+         * emptied it out, so we do not leave a heading over nothing. */
+        Array.prototype.forEach.call(document.querySelectorAll('[data-prep-group]'), function (g) {
+            var items = g.querySelectorAll('[data-prep-item]');
+            g.hidden = !Array.prototype.some.call(items, function (i) { return !i.hidden; });
+        });
+
         Object.keys(counts).forEach(function (slug) {
             var badge = counts[slug];
             if (!badge) return;
@@ -83,7 +98,7 @@
             }
         });
 
-        document.querySelectorAll('[data-prep-no-match]').forEach(function (msg) {
+        Array.prototype.forEach.call(document.querySelectorAll('[data-prep-no-match]'), function (msg) {
             var slug = paneSlug(msg);
             msg.hidden = !q || (visible[slug] || 0) > 0;
         });
