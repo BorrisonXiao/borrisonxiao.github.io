@@ -4,7 +4,7 @@ topic: calculus
 order: 1
 title: "Derivatives: the Product, Quotient, and Chain Rules"
 difficulty: warm-up
-date: 2026-08-12
+date: 2026-08-12 12:00:00
 tags: [derivatives, chain rule, product rule, limits]
 summary: >-
   Differentiate a handful of functions that each need a different rule. The

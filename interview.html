@@ -33,12 +33,19 @@ noindex: true
     </div>
 </div>
 
-{% if total > 3 %}
-<div class="prep-filter-wrap mb-3">
-    <i class="fas fa-magnifying-glass prep-filter-icon"></i>
-    <input type="search" id="prep-filter" class="prep-filter"
-           placeholder="Filter questions by title or tag..." autocomplete="off"
-           aria-label="Filter questions">
+{% if total > 1 %}
+<div class="prep-toolbar mb-3">
+    <div class="prep-filter-wrap">
+        <i class="fas fa-magnifying-glass prep-filter-icon"></i>
+        <input type="search" id="prep-filter" class="prep-filter"
+               placeholder="Filter questions by title or tag..." autocomplete="off"
+               aria-label="Filter questions">
+    </div>
+    <div class="prep-sort" role="group" aria-label="Sort order">
+        <span class="prep-sort-label">Sort</span>
+        <button type="button" class="prep-sort-btn is-active" data-prep-sort="newest">Newest</button>
+        <button type="button" class="prep-sort-btn" data-prep-sort="oldest">Oldest</button>
+    </div>
 </div>
 {% endif %}
 
@@ -88,12 +95,15 @@ noindex: true
         </p>
 
         {% if total > 0 %}
+        {% comment %}
+          Newest first. Every question carries a distinct timestamp, so this
+          sort is a total order and does not depend on Liquid's sort being
+          stable. The Newest/Oldest control just reverses it client-side.
+        {% endcomment %}
+        {% assign newest_first = all_questions | sort: 'date' | reverse %}
         <div class="prep-list" data-prep-list>
-            {% for topic in topics %}
-            {% assign qs = all_questions | where: "topic", topic.slug | sort: "order" %}
-            {% for item in qs %}
-            {% include widgets/interview_card.html item=item topic=topic %}
-            {% endfor %}
+            {% for item in newest_first %}
+            {% include widgets/interview_card.html item=item %}
             {% endfor %}
         </div>
         <p class="prep-no-match text-muted small mt-3" data-prep-no-match hidden>
@@ -108,7 +118,7 @@ noindex: true
     </div>
 
     {% for topic in topics %}
-    {% assign qs = all_questions | where: "topic", topic.slug | sort: "order" %}
+    {% assign qs = all_questions | where: "topic", topic.slug | sort: 'date' | reverse %}
     <div class="tab-pane fade"
          id="prep-pane-{{ topic.slug }}"
          role="tabpanel"

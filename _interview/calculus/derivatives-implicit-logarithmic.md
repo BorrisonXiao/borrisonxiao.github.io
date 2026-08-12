@@ -4,7 +4,7 @@ topic: calculus
 order: 2
 title: "Implicit and Logarithmic Differentiation"
 difficulty: core
-date: 2026-08-12
+date: 2026-08-12 13:00:00
 tags: [derivatives, implicit differentiation, logarithmic differentiation, inverse functions]
 summary: >-
   Two techniques for the cases where you cannot just apply the rules: curves

@@ -13,6 +13,7 @@
 <a class="prep-card"
    href="{{ item.url | relative_url }}"
    data-prep-item
+   data-date="{{ item.date | date: '%Y%m%d%H%M%S' }}"
    data-search="{{ search_blob | strip_html | strip_newlines | downcase | escape }}">
     <div class="prep-card-head">
         <h5 class="prep-card-title">{{ item.title }}</h5>
@@ -20,6 +21,12 @@
         <span class="prep-diff {{ diff_class }}">{{ item.difficulty }}</span>
         {% endif %}
     </div>
+
+    {% if item.date %}
+    <div class="prep-card-meta">
+        <i class="fas fa-calendar-alt"></i> {{ item.date | date: "%b %-d, %Y" }}
+    </div>
+    {% endif %}
 
     {% if item.summary %}
     <p class="prep-card-summary">{{ item.summary | strip_html }}</p>

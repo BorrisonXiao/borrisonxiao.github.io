@@ -4,7 +4,7 @@ topic: calculus
 order: 4
 title: "Partial Fractions, Completing the Square, and Trig Substitution"
 difficulty: core
-date: 2026-08-12
+date: 2026-08-12 15:00:00
 tags: [integrals, partial fractions, trigonometric substitution, rational functions]
 summary: >-
   Three moves that turn integrals you cannot do into ones you can: split a

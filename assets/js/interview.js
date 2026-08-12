@@ -43,6 +43,34 @@
         });
     });
 
+    /* ---- Sorting -------------------------------------------------------- */
+
+    /* Liquid already emits every list newest-first, so this only has to handle
+     * the flip. Cards carry data-date as a sortable YYYYMMDDhhmmss string. */
+    var sortBtns = Array.prototype.slice.call(document.querySelectorAll('[data-prep-sort]'));
+
+    function applySort(dir) {
+        Array.prototype.forEach.call(document.querySelectorAll('[data-prep-list]'), function (list) {
+            var items = Array.prototype.slice.call(list.querySelectorAll('[data-prep-item]'));
+            items.sort(function (a, b) {
+                var da = a.getAttribute('data-date') || '';
+                var db = b.getAttribute('data-date') || '';
+                if (da === db) return 0;
+                var cmp = da < db ? -1 : 1;
+                return dir === 'oldest' ? cmp : -cmp;
+            });
+            items.forEach(function (i) { list.appendChild(i); });
+        });
+    }
+
+    sortBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            sortBtns.forEach(function (o) { o.classList.remove('is-active'); });
+            btn.classList.add('is-active');
+            applySort(btn.getAttribute('data-prep-sort'));
+        });
+    });
+
     /* ---- Filtering ------------------------------------------------------ */
 
     var filter = document.getElementById('prep-filter');

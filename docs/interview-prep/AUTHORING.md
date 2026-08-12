@@ -62,10 +62,10 @@ Create `_interview/<topic-slug>/<question-slug>.md`:
 ---
 layout: interview_question
 topic: signal-processing      # must match a slug in interview_topics.yml
-order: 2                      # sort order within the tab
+order: 2                      # position in the topic's prev/next chain
 title: "Human-readable title"
 difficulty: warm-up           # warm-up | core | stretch  -> badge colour
-date: 2026-08-11
+date: 2026-08-11 12:00:00     # REQUIRED, and must be unique across all questions
 tags: [sampling, aliasing]
 summary: >-
   One paragraph, plain text (no $math$ — it is reused as the card blurb and
@@ -84,6 +84,18 @@ references:                   # renders the "Where this lives in the texts" pane
 
 `concepts` and `references` are not decoration: linking each answer back to the
 concept it rests on is the point of the page. Fill them in.
+
+### Two ordering fields, and why both exist
+
+- **`date` orders the listings.** Every list on `/interview-prep/` is newest
+  first, and the Newest/Oldest control just reverses that. Give each question a
+  **distinct timestamp**, not a bare date — Liquid's `sort` is not stable, so
+  two questions sharing a date would come out in an arbitrary order. Use a
+  midday hour (`12:00:00` and up) so the rendered calendar date cannot slip
+  across midnight when the build host's timezone differs from the author's.
+- **`order` drives prev/next** within a topic, and should follow the sequence
+  you would actually learn them in — which is often not the order they were
+  written. It no longer affects any listing.
 
 ## What a write-up should contain
 

@@ -4,7 +4,7 @@ topic: calculus
 order: 3
 title: "Integration by Substitution and by Parts"
 difficulty: core
-date: 2026-08-12
+date: 2026-08-12 14:00:00
 tags: [integrals, substitution, integration by parts, fundamental theorem]
 summary: >-
   The two workhorses. Substitution is the chain rule run backwards, integration

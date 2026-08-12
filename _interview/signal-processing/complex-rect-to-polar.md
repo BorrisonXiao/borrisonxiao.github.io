@@ -4,7 +4,7 @@ topic: signal-processing
 order: 1
 title: "Rectangular to Polar: a Complex Number as a Length and an Angle"
 difficulty: warm-up
-date: 2026-08-11
+date: 2026-08-11 12:00:00
 tags: [complex numbers, Euler's formula, atan2, phasors]
 summary: >-
   Convert a + jb into r e^{j theta}. The arithmetic takes ten seconds; the point

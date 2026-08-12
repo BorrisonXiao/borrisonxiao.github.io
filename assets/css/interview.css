@@ -41,10 +41,57 @@
     font-style: italic;
 }
 
-/* ---------- Landing page: filter box ---------- */
+/* ---------- Landing page: toolbar (filter + sort) ---------- */
+
+.prep-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.prep-sort {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.prep-sort-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #adb5bd;
+    margin-right: 0.15rem;
+}
+
+.prep-sort-btn {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #55606a;
+    background: #fff;
+    border: 1px solid var(--prep-line);
+    border-radius: 2rem;
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.prep-sort-btn:hover {
+    color: var(--prep-accent);
+    border-color: #b8daff;
+}
+
+.prep-sort-btn.is-active {
+    color: #fff;
+    background: var(--prep-accent);
+    border-color: var(--prep-accent);
+}
 
 .prep-filter-wrap {
     position: relative;
+    flex: 1 1 16rem;
     max-width: 26rem;
 }
 
@@ -219,6 +266,16 @@
 
 .prep-card:hover .prep-card-title {
     color: var(--prep-accent);
+}
+
+.prep-card-meta {
+    font-size: 0.74rem;
+    color: #adb5bd;
+    margin-bottom: 0.5rem;
+}
+
+.prep-card-meta i {
+    margin-right: 0.15rem;
 }
 
 .prep-card-summary {
