@@ -82,6 +82,20 @@
     - Source coding - Huffman, arithmetic, and the entropy bound
     - Channel capacity and the AWGN formula
 
+- slug: calculus
+  name: Calculus
+  short: Calculus
+  icon: fas fa-square-root-variable
+  blurb: >-
+    Differentiation and integration: the rules, the substitutions, and the
+    handful of techniques that turn an unfamiliar expression into one you have
+    already done.
+  planned:
+    - Limits, continuity, and when L'Hopital applies
+    - Taylor series and where the error goes
+    - Multivariable - gradients, Jacobians, and the chain rule in matrix form
+    - Optimization - critical points and the second-derivative test
+
 - slug: ode
   name: ODEs & Dynamical Systems
   short: ODEs
