@@ -9,8 +9,14 @@ noindex: true
 {% assign topics = site.data.interview_topics %}
 {% assign all_questions = site.interview %}
 {% assign total = all_questions | size %}
+{% comment %}
+  Stamp assets with the build time. Without this a browser holds on to the
+  cached CSS while happily taking the new HTML, which shows up as layout fixes
+  appearing not to deploy.
+{% endcomment %}
+{% assign asset_v = site.time | date: '%Y%m%d%H%M%S' %}
 
-<link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}?v={{ asset_v }}">
 
 <div class="prep-hero mb-4">
     <h1 class="mb-2">Practice Problems</h1>
@@ -78,28 +84,18 @@ noindex: true
 
     <div class="tab-pane fade show active" id="prep-pane-all" role="tabpanel" aria-labelledby="prep-tab-all">
         <p class="prep-topic-blurb">
-            Everything on the page, grouped by topic. The tabs above narrow it to
-            one subject at a time.
+            Everything on the page. The tabs above narrow it to one subject at a time.
         </p>
 
         {% if total > 0 %}
-        {% for topic in topics %}
-        {% assign qs = all_questions | where: "topic", topic.slug | sort: "order" %}
-        {% if qs.size > 0 %}
-        <div class="prep-group" data-prep-group>
-            <h2 class="prep-group-title">
-                <i class="{{ topic.icon }}"></i>
-                <a href="#{{ topic.slug }}" data-prep-jump="{{ topic.slug }}">{{ topic.name }}</a>
-                <span class="prep-group-count">{{ qs | size }}</span>
-            </h2>
-            <div class="prep-list" data-prep-list>
-                {% for item in qs %}
-                {% include widgets/interview_card.html item=item topic=topic %}
-                {% endfor %}
-            </div>
+        <div class="prep-list" data-prep-list>
+            {% for topic in topics %}
+            {% assign qs = all_questions | where: "topic", topic.slug | sort: "order" %}
+            {% for item in qs %}
+            {% include widgets/interview_card.html item=item topic=topic %}
+            {% endfor %}
+            {% endfor %}
         </div>
-        {% endif %}
-        {% endfor %}
         <p class="prep-no-match text-muted small mt-3" data-prep-no-match hidden>
             Nothing matches the filter.
         </p>
@@ -149,4 +145,4 @@ noindex: true
     {% endfor %}
 </div>
 
-<script src="{{ '/assets/js/interview.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/interview.js' | relative_url }}?v={{ asset_v }}"></script>

@@ -20,9 +20,15 @@
     <!-- Math and Code -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}">
+    {% comment %}
+      Build-time stamp on our own assets. Without it a browser keeps the cached
+      CSS/JS while taking the new HTML, so layout fixes look like they never
+      deployed.
+    {% endcomment %}
+    {% assign asset_v = site.time | date: '%Y%m%d%H%M%S' %}
+    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}?v={{ asset_v }}">
+    <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}?v={{ asset_v }}">
+    <link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}?v={{ asset_v }}">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100" {{ page.body_attr }}>
     {% include navbar.html active_page="Blog" %}
@@ -165,11 +171,11 @@
             Prism.highlightAll();
         });
     </script>
-    <script src="{{ '/assets/js/interview_question.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/interview_question.js' | relative_url }}?v={{ asset_v }}"></script>
     <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/bubble_visual_hash.js' | relative_url }}"></script>
     {% for s in page.scripts %}
-    <script src="{{ s | relative_url }}"></script>
+    <script src="{{ s | relative_url }}?v={{ asset_v }}"></script>
     {% endfor %}
 </body>
 </html>
