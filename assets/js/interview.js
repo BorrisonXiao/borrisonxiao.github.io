@@ -1,57 +1,84 @@
-/* Interview Prep landing page: tab deep-linking + client-side filtering.
+/* Interview Prep landing page: tab deep-linking, sorting, and filtering.
  *
  * Tab state lives in the URL fragment as the bare topic slug (e.g.
  * /interview-prep/#linear-algebra). The slug deliberately does NOT match any
  * element id on the page, so the browser will not try to scroll to it.
+ *
+ * Nothing here may depend on jQuery being loaded. Sorting and filtering are
+ * plain DOM work; only switching a tab programmatically prefers Bootstrap's
+ * plugin, and there is a native fallback for when it is unavailable. An
+ * earlier version bailed out of the whole module when jQuery was missing,
+ * which silently disabled sorting and filtering as well.
  */
 (function () {
-    var tabs = document.getElementById('prep-tabs');
-    if (!tabs || typeof jQuery === 'undefined') return;
+    'use strict';
 
-    var $ = jQuery;
-    var links = Array.prototype.slice.call(tabs.querySelectorAll('a[data-slug]'));
+    function all(sel, root) {
+        return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+    }
+
+    /* ---- Tabs ------------------------------------------------------------ */
+
+    var tabs = document.getElementById('prep-tabs');
+    var links = tabs ? all('a[data-slug]', tabs) : [];
 
     function slugOf(link) { return link.getAttribute('data-slug'); }
+
+    function setHash(slug) {
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '#' + slug);
+        }
+    }
+
+    /* Bootstrap's own click handler already switches panes; this is only for
+     * switching one programmatically, e.g. when restoring from the fragment. */
+    function showTab(link) {
+        if (typeof jQuery !== 'undefined' && jQuery.fn && jQuery.fn.tab) {
+            jQuery(link).tab('show');
+            return;
+        }
+        links.forEach(function (l) {
+            l.classList.remove('active');
+            l.setAttribute('aria-selected', 'false');
+        });
+        all('.tab-pane').forEach(function (p) { p.classList.remove('show', 'active'); });
+        link.classList.add('active');
+        link.setAttribute('aria-selected', 'true');
+        var pane = document.getElementById('prep-pane-' + slugOf(link));
+        if (pane) pane.classList.add('show', 'active');
+    }
 
     function activate(slug, updateHash) {
         var link = links.filter(function (l) { return slugOf(l) === slug; })[0];
         if (!link) return false;
-        $(link).tab('show');
-        if (updateHash && window.history && window.history.replaceState) {
-            window.history.replaceState(null, '', '#' + slug);
-        }
-        // Keep the freshly-selected pill in view on narrow screens.
-        if (link.scrollIntoView) {
-            link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-        }
+        showTab(link);
+        if (updateHash) setHash(slug);
+        if (link.scrollIntoView) link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         return true;
     }
 
-    // Restore the tab named in the fragment, on load and on back/forward.
-    function fromHash() {
-        var slug = (window.location.hash || '').replace(/^#/, '');
-        if (slug) activate(slug, false);
-    }
-    fromHash();
-    window.addEventListener('hashchange', fromHash);
+    if (links.length) {
+        var fromHash = function () {
+            var slug = (window.location.hash || '').replace(/^#/, '');
+            if (slug) activate(slug, false);
+        };
+        fromHash();
+        window.addEventListener('hashchange', fromHash);
 
-    links.forEach(function (link) {
-        $(link).on('shown.bs.tab', function () {
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState(null, '', '#' + slugOf(link));
-            }
+        links.forEach(function (link) {
+            link.addEventListener('click', function () { setHash(slugOf(link)); });
         });
-    });
+    }
 
-    /* ---- Sorting -------------------------------------------------------- */
+    /* ---- Sorting --------------------------------------------------------- */
 
     /* Liquid already emits every list newest-first, so this only has to handle
      * the flip. Cards carry data-date as a sortable YYYYMMDDhhmmss string. */
-    var sortBtns = Array.prototype.slice.call(document.querySelectorAll('[data-prep-sort]'));
+    var sortBtns = all('[data-prep-sort]');
 
     function applySort(dir) {
-        Array.prototype.forEach.call(document.querySelectorAll('[data-prep-list]'), function (list) {
-            var items = Array.prototype.slice.call(list.querySelectorAll('[data-prep-item]'));
+        all('[data-prep-list]').forEach(function (list) {
+            var items = all('[data-prep-item]', list);
             items.sort(function (a, b) {
                 var da = a.getAttribute('data-date') || '';
                 var db = b.getAttribute('data-date') || '';
@@ -71,19 +98,22 @@
         });
     });
 
-    /* ---- Filtering ------------------------------------------------------ */
+    /* ---- Filtering ------------------------------------------------------- */
 
     var filter = document.getElementById('prep-filter');
     if (!filter) return;
 
-    var items = Array.prototype.slice.call(document.querySelectorAll('[data-prep-item]'));
+    var items = all('[data-prep-item]');
     var counts = {};
-    links.forEach(function (l) {
-        counts[slugOf(l)] = l.querySelector('.prep-tab-count');
+    links.forEach(function (l) { counts[slugOf(l)] = l.querySelector('.prep-tab-count'); });
+
+    /* Remember the unfiltered counts so they can be restored. */
+    Object.keys(counts).forEach(function (slug) {
+        if (counts[slug]) counts[slug].setAttribute('data-total', counts[slug].textContent.trim());
     });
 
     function paneSlug(el) {
-        var pane = el.closest('.tab-pane');
+        var pane = el.closest ? el.closest('.tab-pane') : null;
         return pane ? pane.id.replace(/^prep-pane-/, '') : null;
     }
 
@@ -111,16 +141,11 @@
             }
         });
 
-        Array.prototype.forEach.call(document.querySelectorAll('[data-prep-no-match]'), function (msg) {
+        all('[data-prep-no-match]').forEach(function (msg) {
             var slug = paneSlug(msg);
             msg.hidden = !q || (visible[slug] || 0) > 0;
         });
     }
-
-    // Remember the unfiltered counts so they can be restored.
-    Object.keys(counts).forEach(function (slug) {
-        if (counts[slug]) counts[slug].setAttribute('data-total', counts[slug].textContent.trim());
-    });
 
     filter.addEventListener('input', applyFilter);
     filter.addEventListener('search', applyFilter);

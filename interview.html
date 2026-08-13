@@ -4,19 +4,15 @@ title: Practice Problems
 navbar_title: Blog
 permalink: /interview-prep/
 noindex: true
+styles:
+  - /assets/css/interview.css
+scripts:
+  - /assets/js/interview.js
 ---
 
 {% assign topics = site.data.interview_topics %}
 {% assign all_questions = site.interview %}
 {% assign total = all_questions | size %}
-{% comment %}
-  Stamp assets with the build time. Without this a browser holds on to the
-  cached CSS while happily taking the new HTML, which shows up as layout fixes
-  appearing not to deploy.
-{% endcomment %}
-{% assign asset_v = site.time | date: '%Y%m%d%H%M%S' %}
-
-<link rel="stylesheet" href="{{ '/assets/css/interview.css' | relative_url }}?v={{ asset_v }}">
 
 <div class="prep-hero mb-4">
     <h1 class="mb-2">Practice Problems</h1>
@@ -154,5 +150,3 @@ noindex: true
     </div>
     {% endfor %}
 </div>
-
-<script src="{{ '/assets/js/interview.js' | relative_url }}?v={{ asset_v }}"></script>
