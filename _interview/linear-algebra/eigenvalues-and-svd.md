@@ -99,7 +99,7 @@ $$
 
 ### Worked example: a symmetric $2\times2$
 
-Take $A = \begin{bmatrix}2 & 1\\ 1 & 2\end{bmatrix}$.
+Take $A = \begin{bmatrix}2 & 1\\\\ 1 & 2\end{bmatrix}$.
 
 **Eigenvalues.** $\operatorname{tr}A = 4$ and $\det A = 4 - 1 = 3$, so
 
@@ -121,7 +121,7 @@ $$
 
 and the equation $-v_1 + v_2 = 0$ says $v_1 = v_2$, so $v = (1,1)$. (Both rows give the same equation — they must, since the matrix is singular. If they do not, you have made an arithmetic error, which is a useful check in itself.)
 
-For $\lambda = 1$, $A - I = \begin{bmatrix}1&1\\1&1\end{bmatrix}$ gives $v_1 + v_2 = 0$, so $v = (1,-1)$.
+For $\lambda = 1$, $A - I = \begin{bmatrix}1&1\\\\1&1\end{bmatrix}$ gives $v_1 + v_2 = 0$, so $v = (1,-1)$.
 
 Verify directly: $A(1,1) = (3,3) = 3(1,1)$ ✓ and $A(1,-1) = (1,-1) = 1\cdot(1,-1)$ ✓.
 
@@ -155,7 +155,7 @@ and by the same argument on $AA^{\mathsf T} = U\Sigma^2U^{\mathsf T}$, the $u_i$
 
 ### The same matrix, both ways
 
-For $A = \begin{bmatrix}2&1\\1&2\end{bmatrix}$, since $A$ is symmetric, $A^{\mathsf T}A = A^2$:
+For $A = \begin{bmatrix}2&1\\\\1&2\end{bmatrix}$, since $A$ is symmetric, $A^{\mathsf T}A = A^2$:
 
 $$
 A^{\mathsf T}A = \begin{bmatrix}5&4\\4&5\end{bmatrix},
@@ -176,7 +176,7 @@ It happened only because $A$ is symmetric with non-negative eigenvalues. In gene
 
 - **symmetric positive semidefinite** — $\sigma_i = \lambda_i$ and $U = V$; the two decompositions coincide. This is the case for covariance matrices, which is why PCA can be described with either.
 - **symmetric, some $\lambda_i < 0$** — $\sigma_i = \lvert\lambda_i\rvert$. The sign cannot survive, since singular values are non-negative by definition; it reappears as a flipped singular vector.
-- **anything else** — different numbers *and* different directions. For $\begin{bmatrix}4&1\\2&3\end{bmatrix}$ the eigenvalues are $5$ and $2$ while the singular values are $\approx 5.117$ and $\approx 1.954$; the eigenvectors are not even perpendicular, whereas the singular vectors always are.
+- **anything else** — different numbers *and* different directions. For $\begin{bmatrix}4&1\\\\2&3\end{bmatrix}$ the eigenvalues are $5$ and $2$ while the singular values are $\approx 5.117$ and $\approx 1.954$; the eigenvectors are not even perpendicular, whereas the singular vectors always are.
 
 The structural reason is the shape of the two factorizations. $A = PDP^{-1}$ uses **one** basis on both sides, so it only makes sense when the input and output live in the same space, and it needs enough eigenvectors to span. $A = U\Sigma V^{\mathsf T}$ uses **two** independent orthonormal bases, one for the input space and one for the output. That extra freedom is exactly what lets the SVD exist for every matrix — rectangular, singular, or defective — while the eigendecomposition can fail outright, as parts (b) and (c) of the problem show.
 
@@ -193,7 +193,7 @@ Feed $A$ every unit vector and you get an ellipse. The eigenvector directions ar
   </div>
 </div>
 
-Both families are drawn. On the symmetric presets — $\begin{bmatrix}2&1\\1&2\end{bmatrix}$ and $\begin{bmatrix}1&2\\2&4\end{bmatrix}$ — the pink eigenvector lines sit exactly along the orange singular axes. On $\begin{bmatrix}4&1\\2&3\end{bmatrix}$ they visibly come apart. On the rotation $\begin{bmatrix}0&-1\\1&0\end{bmatrix}$ there are no pink lines at all, yet the orange axes are still there: the SVD does not mind.
+Both families are drawn. On the symmetric presets — $\begin{bmatrix}2&1\\\\1&2\end{bmatrix}$ and $\begin{bmatrix}1&2\\\\2&4\end{bmatrix}$ — the pink eigenvector lines sit exactly along the orange singular axes. On $\begin{bmatrix}4&1\\\\2&3\end{bmatrix}$ they visibly come apart. On the rotation $\begin{bmatrix}0&-1\\\\1&0\end{bmatrix}$ there are no pink lines at all, yet the orange axes are still there: the SVD does not mind.
 
 </div>
 </details>
@@ -237,11 +237,11 @@ Work them on paper first — that is what the page is for.
 
 | | | result |
 |---|---|---|
-| (a) | $\begin{bmatrix}4&1\\2&3\end{bmatrix}$ | $\lambda = 5$ with $v=(1,1)$; $\lambda = 2$ with $v=(1,-2)$ |
-| (b) | $\begin{bmatrix}0&-1\\1&0\end{bmatrix}$ | $\lambda = \pm j$; no real eigenvectors — it is a $90^\circ$ rotation |
-| (c) | $\begin{bmatrix}3&1\\0&3\end{bmatrix}$ | $\lambda = 3$ twice, but only one eigenvector $(1,0)$ — defective |
-| 2 | $B = \begin{bmatrix}3&0\\4&5\end{bmatrix}$ | $\sigma_1 = 3\sqrt5,\ \sigma_2 = \sqrt5$; $V = \tfrac{1}{\sqrt2}\begin{bmatrix}1&1\\1&-1\end{bmatrix}$, $U = \tfrac{1}{\sqrt{10}}\begin{bmatrix}1&3\\3&-1\end{bmatrix}$ |
-| 3 | | rank 2, $\lVert B\rVert_2 = 3\sqrt5$, $\lVert B\rVert_F = \sqrt{50}$, $\kappa_2 = 3$, best rank-1 is $\begin{bmatrix}1.5&1.5\\4.5&4.5\end{bmatrix}$ with error $\sqrt5$ |
+| (a) | $\begin{bmatrix}4&1\\\\2&3\end{bmatrix}$ | $\lambda = 5$ with $v=(1,1)$; $\lambda = 2$ with $v=(1,-2)$ |
+| (b) | $\begin{bmatrix}0&-1\\\\1&0\end{bmatrix}$ | $\lambda = \pm j$; no real eigenvectors — it is a $90^\circ$ rotation |
+| (c) | $\begin{bmatrix}3&1\\\\0&3\end{bmatrix}$ | $\lambda = 3$ twice, but only one eigenvector $(1,0)$ — defective |
+| 2 | $B = \begin{bmatrix}3&0\\\\4&5\end{bmatrix}$ | $\sigma_1 = 3\sqrt5,\ \sigma_2 = \sqrt5$; $V = \tfrac{1}{\sqrt2}\begin{bmatrix}1&1\\\\1&-1\end{bmatrix}$, $U = \tfrac{1}{\sqrt{10}}\begin{bmatrix}1&3\\\\3&-1\end{bmatrix}$ |
+| 3 | | rank 2, $\lVert B\rVert_2 = 3\sqrt5$, $\lVert B\rVert_F = \sqrt{50}$, $\kappa_2 = 3$, best rank-1 is $\begin{bmatrix}1.5&1.5\\\\4.5&4.5\end{bmatrix}$ with error $\sqrt5$ |
 | 4 | | $\sigma_i = \lvert\lambda_i\rvert$; e.g. $\operatorname{diag}(1,-2)$ has $\lambda = 1,-2$ but $\sigma = 2,1$ |
 
 ## Part 1(a): the ordinary case
@@ -252,9 +252,9 @@ $$
 \lambda^2 - 7\lambda + 10 = 0 \quad\Longrightarrow\quad (\lambda-5)(\lambda-2) = 0 .
 $$
 
-For $\lambda = 5$: $A - 5I = \begin{bmatrix}-1&1\\2&-2\end{bmatrix}$, giving $v_1 = v_2$, so $v = (1,1)$.
+For $\lambda = 5$: $A - 5I = \begin{bmatrix}-1&1\\\\2&-2\end{bmatrix}$, giving $v_1 = v_2$, so $v = (1,1)$.
 
-For $\lambda = 2$: $A - 2I = \begin{bmatrix}2&1\\2&1\end{bmatrix}$, giving $2v_1 + v_2 = 0$, so $v = (1,-2)$.
+For $\lambda = 2$: $A - 2I = \begin{bmatrix}2&1\\\\2&1\end{bmatrix}$, giving $2v_1 + v_2 = 0$, so $v = (1,-2)$.
 
 Check: $A(1,1) = (5,5)$ ✓ and $A(1,-2) = (2,-4) = 2(1,-2)$ ✓. The eigenvectors are *not* perpendicular here — $A$ is not symmetric, so nothing promised they would be.
 
@@ -321,7 +321,7 @@ because $U^{\mathsf T}U = I$. That is an ordinary eigendecomposition of a symmet
 2. take $\sigma_i = \sqrt{\lambda_i}$, which is real and non-negative because $A^{\mathsf T}A$ is positive semidefinite;
 3. recover $u_i = \dfrac{Av_i}{\sigma_i}$ for every $\sigma_i > 0$.
 
-**Step 1.** With $B = \begin{bmatrix}3&0\\4&5\end{bmatrix}$,
+**Step 1.** With $B = \begin{bmatrix}3&0\\\\4&5\end{bmatrix}$,
 
 $$
 B^{\mathsf T}B
@@ -331,7 +331,7 @@ $$
 
 This is symmetric, as it must be. Its trace is $50$ and determinant $625 - 400 = 225$, so $\lambda^2 - 50\lambda + 225 = 0$, giving $\lambda = 45$ and $\lambda = 5$.
 
-For a matrix of the form $\begin{bmatrix}p&q\\q&p\end{bmatrix}$ the eigenvectors are always $(1,1)$ and $(1,-1)$, with eigenvalues $p+q$ and $p-q$ — here $45$ and $5$, confirming the arithmetic. Normalized:
+For a matrix of the form $\begin{bmatrix}p&q\\\\q&p\end{bmatrix}$ the eigenvectors are always $(1,1)$ and $(1,-1)$, with eigenvalues $p+q$ and $p-q$ — here $45$ and $5$, confirming the arithmetic. Normalized:
 
 $$
 v_1 = \tfrac{1}{\sqrt2}(1,1),
@@ -473,9 +473,9 @@ The rule of thumb: **iteration and dynamics want eigenvalues** — $A^k$, matrix
 
 $\operatorname{tr} = 7$, $\det = 10 - 4 = 6$, so $\lambda^2 - 7\lambda + 6 = (\lambda-6)(\lambda-1)$, giving $\lambda = 6, 1$.
 
-$\lambda = 6$: $\begin{bmatrix}-1&4\\1&-4\end{bmatrix}$ gives $v_1 = 4v_2$, so $v = (4,1)$.
+$\lambda = 6$: $\begin{bmatrix}-1&4\\\\1&-4\end{bmatrix}$ gives $v_1 = 4v_2$, so $v = (4,1)$.
 
-$\lambda = 1$: $\begin{bmatrix}4&4\\1&1\end{bmatrix}$ gives $v_1 = -v_2$, so $v = (1,-1)$.
+$\lambda = 1$: $\begin{bmatrix}4&4\\\\1&1\end{bmatrix}$ gives $v_1 = -v_2$, so $v = (1,-1)$.
 
 Check: $A(4,1) = (24,6) = 6(4,1)$ ✓, $A(1,-1) = (1,-1)$ ✓.
 
@@ -506,7 +506,7 @@ A^{n} = PD^{n}P^{-1}
 = \frac12\begin{bmatrix}3^{n}+1 & 3^{n}-1\\ 3^{n}-1 & 3^{n}+1\end{bmatrix}.
 $$
 
-Sanity check at $n=1$: $\tfrac12\begin{bmatrix}4&2\\2&4\end{bmatrix} = A$ ✓. At $n = 10$, $3^{10} = 59049$, so
+Sanity check at $n=1$: $\tfrac12\begin{bmatrix}4&2\\\\2&4\end{bmatrix} = A$ ✓. At $n = 10$, $3^{10} = 59049$, so
 
 $$
 A^{10} = \begin{bmatrix}29525 & 29524\\ 29524 & 29525\end{bmatrix}.
@@ -531,7 +531,7 @@ $$
 
 so $\lambda = 25, 0$ and $\sigma_1 = 5$, $\sigma_2 = 0$.
 
-For $\lambda = 25$: $\begin{bmatrix}-20&10\\10&-5\end{bmatrix}$ gives $2v_1 = v_2$, so $v_1 = \tfrac{1}{\sqrt5}(1,2)$. Then
+For $\lambda = 25$: $\begin{bmatrix}-20&10\\\\10&-5\end{bmatrix}$ gives $2v_1 = v_2$, so $v_1 = \tfrac{1}{\sqrt5}(1,2)$. Then
 
 $$
 u_1 = \frac{Av_1}{\sigma_1} = \frac{1}{5\sqrt5}\begin{bmatrix}5\\10\end{bmatrix} = \frac{1}{\sqrt5}\begin{bmatrix}1\\2\end{bmatrix},

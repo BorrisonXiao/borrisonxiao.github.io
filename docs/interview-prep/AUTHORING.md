@@ -213,6 +213,24 @@ Two gotchas:
 - Keep big math out of **headings**. The table of contents is built from the
   heading's text, so a `\begin{bmatrix}` in an `###` shows up there as raw
   LaTeX. Short inline math like `$e^{j\theta}$` is fine; a matrix is not.
+- **Row breaks inside `$inline$` math must be written `\\\\`, not `\\`.**
+  Kramdown does not know that `$…$` is math, so it applies its ordinary
+  span-level escape rule and collapses `\\` to a single backslash. KaTeX then
+  reads that as a control-space rather than a row separator and lays every
+  entry of the matrix out on one line. Doubling it in the source means KaTeX
+  receives the `\\` it wants.
+
+  This does **not** apply in two places: `$$…$$` display blocks, which kramdown
+  hands to KaTeX verbatim, and raw HTML such as a `<summary>`, which kramdown
+  never parses. In both of those, write `\\` as normal.
+
+  ```
+  $\begin{bmatrix}2 & 1\\\\ 1 & 2\end{bmatrix}$     inline  -> doubled
+  <summary>… $\begin{bmatrix}2&1\\ 1&2\end{bmatrix}$   raw HTML -> single
+  ```
+
+  To find offenders: any `$…$` span containing `\\` on a line that is neither
+  inside a `$$` block nor part of a `<summary>`.
 - Headings start at `##`; the page title is already an `<h1>`. The right-hand
   table of contents is built from `h1`–`h3` by `assets/js/blog.js`.
 
