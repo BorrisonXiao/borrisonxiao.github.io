@@ -121,7 +121,9 @@ So the body of a question file is:
 
 ### What a <thing> is
   … the definitions, algebraic and geometric. Short. ~600 words for the
-    whole example section is about right.
+    whole example section is about right; go longer only when the problem
+    genuinely needs two ideas up front (the eigenvalue/SVD question needs
+    both objects and the relation between them, and runs to about 1000).
 ### Worked example: <the simplest case>
   … every step, including the check at the end, then the visualization that
     explains the concept …
@@ -208,6 +210,9 @@ Two gotchas:
 
 - A `|` inside math inside a **table** is read as a cell separator. Use
   `\lvert … \rvert` instead of `|…|` in tables.
+- Keep big math out of **headings**. The table of contents is built from the
+  heading's text, so a `\begin{bmatrix}` in an `###` shows up there as raw
+  LaTeX. Short inline math like `$e^{j\theta}$` is fine; a matrix is not.
 - Headings start at `##`; the page title is already an `<h1>`. The right-hand
   table of contents is built from `h1`–`h3` by `assets/js/blog.js`.
 

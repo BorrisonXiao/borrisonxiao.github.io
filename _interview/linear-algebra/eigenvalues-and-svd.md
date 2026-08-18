@@ -97,7 +97,9 @@ $$
 \lambda_1\lambda_2 = \det A .
 $$
 
-### Worked example: $A = \begin{bmatrix}2 & 1\\ 1 & 2\end{bmatrix}$
+### Worked example: a symmetric $2\times2$
+
+Take $A = \begin{bmatrix}2 & 1\\ 1 & 2\end{bmatrix}$.
 
 **Eigenvalues.** $\operatorname{tr}A = 4$ and $\det A = 4 - 1 = 3$, so
 
@@ -125,9 +127,64 @@ Verify directly: $A(1,1) = (3,3) = 3(1,1)$ ✓ and $A(1,-1) = (1,-1) = 1\cdot(1,
 
 Note the two eigenvectors are perpendicular. That is not luck — $A$ is symmetric, and the spectral theorem guarantees it.
 
+### Where the SVD comes in
+
+Eigenvectors answer *which directions does $A$ leave alone?* A different question is *what shape does $A$ turn the unit circle into?*, and that one is answered by the **singular value decomposition**:
+
+$$
+A = U\Sigma V^{\mathsf T},
+$$
+
+where $U$ and $V$ are orthogonal — their columns are two orthonormal bases — and $\Sigma$ is diagonal with non-negative entries $\sigma_1 \ge \sigma_2 \ge \cdots \ge 0$. Geometrically the $\sigma_i$ are the semi-axis lengths of that ellipse, the $v_i$ are the input directions that land on the axes, and the $u_i$ are the axis directions themselves.
+
+**Underneath, it is still an eigenproblem.** Multiply the factorization by its own transpose and use $U^{\mathsf T}U = I$:
+
+$$
+A^{\mathsf T}A = V\Sigma^{\mathsf T}U^{\mathsf T}U\Sigma V^{\mathsf T} = V\Sigma^2 V^{\mathsf T} .
+$$
+
+The right-hand side is an ordinary eigendecomposition of the symmetric matrix $A^{\mathsf T}A$. So
+
+$$
+v_i = \text{eigenvectors of } A^{\mathsf T}A,
+\qquad
+\sigma_i = \sqrt{\lambda_i\!\left(A^{\mathsf T}A\right)},
+$$
+
+and by the same argument on $AA^{\mathsf T} = U\Sigma^2U^{\mathsf T}$, the $u_i$ are the eigenvectors of $AA^{\mathsf T}$. **The SVD is an eigenproblem — just not of $A$.** That is the entire recipe, and Part 2 of the problem is one turn of it.
+
+### The same matrix, both ways
+
+For $A = \begin{bmatrix}2&1\\1&2\end{bmatrix}$, since $A$ is symmetric, $A^{\mathsf T}A = A^2$:
+
+$$
+A^{\mathsf T}A = \begin{bmatrix}5&4\\4&5\end{bmatrix},
+$$
+
+whose eigenvalues are $5\pm4 = 9$ and $1$, with the same eigenvectors $(1,1)$ and $(1,-1)$ as before. So
+
+$$
+\sigma_1 = \sqrt9 = 3, \qquad \sigma_2 = \sqrt1 = 1 ,
+$$
+
+which are exactly the eigenvalues we already found, along the same directions. For this matrix $U = V$ and the two decompositions are the same object written twice.
+
+<div class="q-callout q-callout-trap" markdown="1">
+<div class="q-callout-title"><i class="fas fa-triangle-exclamation"></i> That coincidence is not the general rule</div>
+
+It happened only because $A$ is symmetric with non-negative eigenvalues. In general:
+
+- **symmetric positive semidefinite** — $\sigma_i = \lambda_i$ and $U = V$; the two decompositions coincide. This is the case for covariance matrices, which is why PCA can be described with either.
+- **symmetric, some $\lambda_i < 0$** — $\sigma_i = \lvert\lambda_i\rvert$. The sign cannot survive, since singular values are non-negative by definition; it reappears as a flipped singular vector.
+- **anything else** — different numbers *and* different directions. For $\begin{bmatrix}4&1\\2&3\end{bmatrix}$ the eigenvalues are $5$ and $2$ while the singular values are $\approx 5.117$ and $\approx 1.954$; the eigenvectors are not even perpendicular, whereas the singular vectors always are.
+
+The structural reason is the shape of the two factorizations. $A = PDP^{-1}$ uses **one** basis on both sides, so it only makes sense when the input and output live in the same space, and it needs enough eigenvectors to span. $A = U\Sigma V^{\mathsf T}$ uses **two** independent orthonormal bases, one for the input space and one for the output. That extra freedom is exactly what lets the SVD exist for every matrix — rectangular, singular, or defective — while the eigendecomposition can fail outright, as parts (b) and (c) of the problem show.
+
+</div>
+
 ### The picture
 
-Feed $A$ every unit vector and you get an ellipse. The eigenvector directions are the ones where the output stays on the same line through the origin.
+Feed $A$ every unit vector and you get an ellipse. The eigenvector directions are the ones where the output stays on the same line through the origin; the singular vectors are the ones that land on the ellipse's axes.
 
 <div class="viz" data-viz="linear-map">
   <div class="viz-head">
@@ -136,7 +193,7 @@ Feed $A$ every unit vector and you get an ellipse. The eigenvector directions ar
   </div>
 </div>
 
-The circle always becomes an ellipse, and the orange arrows are its axes. Those come from the **singular value decomposition**, not the eigenvalues, and the problem below is largely about the difference.
+Both families are drawn. On the symmetric presets — $\begin{bmatrix}2&1\\1&2\end{bmatrix}$ and $\begin{bmatrix}1&2\\2&4\end{bmatrix}$ — the pink eigenvector lines sit exactly along the orange singular axes. On $\begin{bmatrix}4&1\\2&3\end{bmatrix}$ they visibly come apart. On the rotation $\begin{bmatrix}0&-1\\1&0\end{bmatrix}$ there are no pink lines at all, yet the orange axes are still there: the SVD does not mind.
 
 </div>
 </details>
